@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _Load_h
 #define _Load_h
 
@@ -30,4 +28,4 @@ public:
 
 
 };
-#endif // _load_h
+#endif 

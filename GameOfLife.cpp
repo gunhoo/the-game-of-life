@@ -34,6 +34,11 @@ void GameOfLife::resizeGrid(int row, int col)
     gridPart.resizeGrid(row, col);
 }
 
+void GameOfLife::readFromOut(const vector< vector<bool> > &grid)
+{
+    gridPart.readFromOut(grid);
+}
+
 int GameOfLife::getRow()
 {
     return gridPart.getRow();

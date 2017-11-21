@@ -32,6 +32,11 @@ public:
      */ 
     void resizeGrid(int row, int col);
 
+    /* read grid from GUI 
+     * @parameter: the 2d vector of grid
+     */
+    void readFromOut(const vector< vector<bool> > &grid);
+
     int getRow(); // return the number of row
     int getCol(); // return the number of column
 

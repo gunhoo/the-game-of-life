@@ -32,6 +32,9 @@ public:
      */ 
     void resizeGrid(int row, int col);
 
+    int getRow(); // return the number of row
+    int getCol(); // return the number of column
+
 private:
     Grid gridPart;
     Save savePart;

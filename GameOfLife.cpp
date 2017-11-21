@@ -7,7 +7,7 @@ void GameOfLife::updateGrid()
 
 const vector< vector<bool> >& GameOfLife::getGrid()
 {
-    gridPart.getGrid();
+    return gridPart.getGrid();
 }
 
 int GameOfLife::load(string fileName)
@@ -32,4 +32,14 @@ int GameOfLife::save(string fileName)
 void GameOfLife::resizeGrid(int row, int col)
 {
     gridPart.resizeGrid(row, col);
+}
+
+int GameOfLife::getRow()
+{
+    return gridPart.getRow();
+}
+
+int GameOfLife::getCol()
+{
+    return gridPart.getColumn();
 }

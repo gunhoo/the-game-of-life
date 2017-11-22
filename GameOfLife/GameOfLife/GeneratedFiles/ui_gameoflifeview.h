@@ -31,9 +31,10 @@ public:
     QAction *actionOpen;
     QAction *actionSave;
     QAction *actionSave_As;
+    QAction *actionQuit;
     QWidget *centralWidget;
-    QPushButton *pushButton;
-    QPushButton *pushButton_2;
+    QPushButton *runButton;
+    QPushButton *nextButton;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -43,7 +44,9 @@ public:
     {
         if (GameOfLifeViewClass->objectName().isEmpty())
             GameOfLifeViewClass->setObjectName(QStringLiteral("GameOfLifeViewClass"));
-        GameOfLifeViewClass->resize(717, 400);
+        GameOfLifeViewClass->resize(800, 450);
+        GameOfLifeViewClass->setMinimumSize(QSize(800, 450));
+        GameOfLifeViewClass->setMaximumSize(QSize(2000, 1500));
         actionNew = new QAction(GameOfLifeViewClass);
         actionNew->setObjectName(QStringLiteral("actionNew"));
         actionOpen = new QAction(GameOfLifeViewClass);
@@ -52,23 +55,30 @@ public:
         actionSave->setObjectName(QStringLiteral("actionSave"));
         actionSave_As = new QAction(GameOfLifeViewClass);
         actionSave_As->setObjectName(QStringLiteral("actionSave_As"));
+        actionQuit = new QAction(GameOfLifeViewClass);
+        actionQuit->setObjectName(QStringLiteral("actionQuit"));
         centralWidget = new QWidget(GameOfLifeViewClass);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
-        pushButton = new QPushButton(centralWidget);
-        pushButton->setObjectName(QStringLiteral("pushButton"));
-        pushButton->setGeometry(QRect(640, 320, 75, 23));
-        pushButton_2 = new QPushButton(centralWidget);
-        pushButton_2->setObjectName(QStringLiteral("pushButton_2"));
-        pushButton_2->setGeometry(QRect(560, 320, 75, 23));
+        runButton = new QPushButton(centralWidget);
+        runButton->setObjectName(QStringLiteral("runButton"));
+        runButton->setGeometry(QRect(10, 10, 100, 30));
+        runButton->setMinimumSize(QSize(100, 30));
+        runButton->setMaximumSize(QSize(100, 30));
+        nextButton = new QPushButton(centralWidget);
+        nextButton->setObjectName(QStringLiteral("nextButton"));
+        nextButton->setGeometry(QRect(120, 10, 100, 30));
+        nextButton->setMinimumSize(QSize(100, 30));
+        nextButton->setMaximumSize(QSize(100, 30));
         GameOfLifeViewClass->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(GameOfLifeViewClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 717, 21));
+        menuBar->setGeometry(QRect(0, 0, 800, 21));
         menuFile = new QMenu(menuBar);
         menuFile->setObjectName(QStringLiteral("menuFile"));
         GameOfLifeViewClass->setMenuBar(menuBar);
         mainToolBar = new QToolBar(GameOfLifeViewClass);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
+        mainToolBar->setEnabled(true);
         GameOfLifeViewClass->addToolBar(Qt::TopToolBarArea, mainToolBar);
         statusBar = new QStatusBar(GameOfLifeViewClass);
         statusBar->setObjectName(QStringLiteral("statusBar"));
@@ -79,6 +89,7 @@ public:
         menuFile->addAction(actionOpen);
         menuFile->addAction(actionSave);
         menuFile->addAction(actionSave_As);
+        menuFile->addAction(actionQuit);
 
         retranslateUi(GameOfLifeViewClass);
 
@@ -92,8 +103,9 @@ public:
         actionOpen->setText(QApplication::translate("GameOfLifeViewClass", "Open", 0));
         actionSave->setText(QApplication::translate("GameOfLifeViewClass", "Save", 0));
         actionSave_As->setText(QApplication::translate("GameOfLifeViewClass", "Save As", 0));
-        pushButton->setText(QApplication::translate("GameOfLifeViewClass", "run", 0));
-        pushButton_2->setText(QApplication::translate("GameOfLifeViewClass", "next", 0));
+        actionQuit->setText(QApplication::translate("GameOfLifeViewClass", "Quit", 0));
+        runButton->setText(QApplication::translate("GameOfLifeViewClass", "run", 0));
+        nextButton->setText(QApplication::translate("GameOfLifeViewClass", "next", 0));
         menuFile->setTitle(QApplication::translate("GameOfLifeViewClass", "File", 0));
     } // retranslateUi
 

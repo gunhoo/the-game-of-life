@@ -1,5 +1,6 @@
 #include "GameOfLife.h"
 
+/* Logic Part */
 void GameOfLife::updateGrid()
 {
 	gridPart.updateGrid();
@@ -48,3 +49,5 @@ int GameOfLife::getCol()
 {
 	return gridPart.getColumn();
 }
+
+/* GUI part */

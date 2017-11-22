@@ -1,10 +1,15 @@
 #include "gameoflifeview.h"
+#include "initialview.h"
+#include "GameOfLife.h"
 #include <QtWidgets/QApplication>
 
 int main(int argc, char *argv[])
 {
-	QApplication a(argc, argv);
-	GameOfLifeView w;
-	w.show();
-	return a.exec();
+	QApplication app(argc, argv);
+
+	GameOfLifeView gameOfLifeView;
+	gameOfLifeView.showNormal();
+	gameOfLifeView.initialize();
+
+	return app.exec();
 }

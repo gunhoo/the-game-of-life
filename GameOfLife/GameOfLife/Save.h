@@ -1,5 +1,3 @@
-#pragma once
-
 #ifndef _Save_h
 #define _Save_h
 
@@ -16,10 +14,10 @@ private:
 public:
 
 	/*
-	save success = return 1
+	save success = return 1 
 	save fail (if file is already exist) = reuturn -1
 	*/
-	int saveFile(string fileName, vector< vector< bool >> grid, int row, int col);
+	int saveFile(string fileName, vector< vector< bool > > grid, int row, int col);
 
 };
 

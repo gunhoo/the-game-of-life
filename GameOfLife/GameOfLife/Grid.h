@@ -19,14 +19,16 @@ class Grid {
 public:
     /* constructor. 
      * Grid be represented by a 2-d bool vector
-     * default size is 50 * 40
+     * size is 50 * 40
      * tmpGrid also be initial at here.
      */
-    Grid(int row = 50, int col = 40); 
+    Grid(); 
 
+/*
     int getRow(); // return the #row
     
     int getColumn(); // return the #column
+*/
 
     /* resize the grid, set all the element to false
      * @parameter: #row, #column
@@ -41,7 +43,7 @@ public:
 
     /* read a new grid from out
      * update the currLive list at same time.
-     * @parameter: a reference to the input grid. 
+     * @parameter: 2d vector from GridManager's initGrid
      */
     void readFromOut(const vector< vector<bool> > &grid); // change cell's state
 
@@ -50,7 +52,7 @@ public:
      */
     void clear();
 
-	vector< vector<bool> >& getGrid();
+	const vector< vector<bool> >& getGrid();
 
 private:
     // cell structure for store the living cells into list.

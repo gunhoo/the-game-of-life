@@ -1,7 +1,6 @@
 #pragma once
 
-#ifndef _FileManager_h
-#define _FileMAnager_h
+ 
 
 #include <iostream>
 #include <vector>

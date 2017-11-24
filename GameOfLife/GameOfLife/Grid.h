@@ -52,6 +52,7 @@ public:
      */
     const vector< vector<bool> >& clear();
 
+    const vector< vector<bool> >& getPattern();
 
 private:
     // cell structure for store the living cells into list.

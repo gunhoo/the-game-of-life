@@ -93,6 +93,11 @@ const vector< vector<bool> >& Grid::clear()
     return gridShow;
 }
 
+const vector< vector<bool> >& Grid::getPattern()
+{
+    return gridShow;
+}
+
 void Grid::updateHelper(unsigned int row, unsigned int col, list<struct cell> &tmpList)
 {
     int count = 0;

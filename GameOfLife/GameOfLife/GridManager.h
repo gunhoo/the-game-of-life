@@ -49,6 +49,9 @@ public:
 
     const vector< vector<bool> >& generateGrid();
 
+    const vector< vector<bool> >& getPattern();
+
+
 private:
     vector< vector<bool> > initGrid;
     unsigned int numOfRow;

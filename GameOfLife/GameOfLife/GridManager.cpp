@@ -64,3 +64,8 @@ const vector< vector<bool> >& GridManager::generateGrid()
 {
     return gridUpdate.updateGrid();
 }
+
+const vector< vector<bool> >& GridManager::getPattern()
+{
+    return gridUpdate.getPattern();
+}

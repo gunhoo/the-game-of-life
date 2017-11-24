@@ -48,6 +48,11 @@ const vector< vector<bool> >& GridManager::clear()
     return gridUpdate.clear();
 }
 
+void GridManager::setGnrtGrid(const vector< vector<bool> >& grid)
+{
+    gridUpdate.setGnrtGrid(grid);
+}
+
 void GridManager::newGrid()
 {
     numOfRow = 50;

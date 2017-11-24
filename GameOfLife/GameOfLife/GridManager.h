@@ -45,6 +45,8 @@ public:
      */
     void newGrid();
 
+    void setGnrtGrid(const vector< vector<bool> >& grid);
+
     const vector< vector<bool> >& generateGrid();
 
 private:

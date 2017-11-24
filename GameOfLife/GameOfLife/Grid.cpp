@@ -71,7 +71,7 @@ const vector< vector<bool> >& Grid::updateGrid()
     return gridShow;
 }
 
-void Grid::readFromOut(const vector< vector<bool> > &grid)
+void Grid::setGnrtGrid(const vector< vector<bool> > &grid)
 {
     gridShow = grid;
 
@@ -93,7 +93,7 @@ const vector< vector<bool> >& Grid::clear()
     return gridShow;
 }
 
-void Grid::updateHelper(int row, int col, list<struct cell> &tmpList)
+void Grid::updateHelper(unsigned int row, unsigned int col, list<struct cell> &tmpList)
 {
     int count = 0;
     for (int c = -1; c < 2; c++) {

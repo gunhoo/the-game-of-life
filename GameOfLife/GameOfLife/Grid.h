@@ -45,7 +45,7 @@ public:
      * update the currLive list at same time.
      * @parameter: 2d vector from GridManager's initGrid
      */
-    void readFromOut(const vector< vector<bool> > &grid); // change cell's state
+    void setGnrtGrid(const vector< vector<bool> > &grid); // change cell's state
 
     /* set all the element's to dead, clear the living cell list
      * does not change the #row and #col

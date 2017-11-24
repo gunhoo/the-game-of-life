@@ -1,17 +1,10 @@
 #include "GridManager.h"
 
-GridManager::GridManager(int row, int col)
+GridManager::GridManager()
 {
-    if (row != 50 && col != 40) {
-        numOfRow = row;
-        numOfCol = col;
-        initGrid.assign(numOfRow, vector<bool>(numOfCol, false));
-    }
-    else {
         numOfRow = 50;
         numOfCol = 40;
         initGrid.assign(50, vector<bool>(40, false));
-    }
 }
 
 vector< vector<bool> > & GridManager::getInitGrid()
@@ -39,9 +32,9 @@ void GridManager::setNumOfCol(unsigned int col)
     numOfCol = col;
 }
 
-void GridManager::clear()
+const vector< vector<bool> >& GridManager::clear()
 {
-    gridUpdate.clear();
+    return gridUpdate.clear();
 }
 
 void GridManager::newGrid()
@@ -53,6 +46,5 @@ void GridManager::newGrid()
 
 const vector< vector<bool> >& GridManager::generateGrid()
 {
-    gridUpdate.readFromOut(initGrid);
     return gridUpdate.updateGrid();
 }

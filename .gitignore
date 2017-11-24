@@ -2,3 +2,7 @@
 
 # visual studio opendb
 *.opendb
+GameOfLife/GameOfLife/GeneratedFiles/.DS_Store
+GameOfLife/GameOfLife/.DS_Store
+GameOfLife/.DS_Store
+.DS_Store

@@ -15,10 +15,9 @@ using namespace std;
 class GridManager {
 public:
     /* the constructor
-     * if there is given size, build grid depends on the size
-     * else, build a default grid which size is 50 * 40
+     * build a default grid which size is 50 * 40
      */
-    GridManager(int row = 50, int col = 40);
+    GridManager();
 
     /* pass grid's referenec
      * let load to modify the initGrid
@@ -33,7 +32,7 @@ public:
     /* clear current grid
      * set all the cells to be dead
      */
-    void clear();
+    const vector< vector<bool> > & clear();
 
     /* create a new default grid
      * clear all the current data

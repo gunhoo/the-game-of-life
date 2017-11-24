@@ -20,11 +20,6 @@ int Grid::getColumn()
 }
 */
 
-const vector< vector<bool> >& Grid::getGrid()
-{
-	return gridShow;
-}
-
 void Grid::resizeGrid(int row, int col)
 {
     numOfRow = row;
@@ -33,8 +28,7 @@ void Grid::resizeGrid(int row, int col)
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
 }
-
-void Grid::updateGrid()
+const vector< vector<bool> >& Grid::updateGrid()
 {
     // for find the min block we need to check
     unsigned int min_row = numOfRow - 1;
@@ -73,6 +67,8 @@ void Grid::updateGrid()
 
     currLive = updateCell;
     gridShow = tmpGrid; 
+
+    return gridShow;
 }
 
 void Grid::readFromOut(const vector< vector<bool> > &grid)
@@ -89,11 +85,12 @@ void Grid::readFromOut(const vector< vector<bool> > &grid)
     }
 }
 
-void Grid::clear()
+const vector< vector<bool> >& Grid::clear()
 {
     gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
+    return gridShow;
 }
 
 void Grid::updateHelper(int x, int y, list<struct cell> &tmpList)

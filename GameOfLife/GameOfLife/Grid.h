@@ -3,11 +3,11 @@
  * provide the grid, update cell's state
  * associate with Load and Store class to input or output data file.
  * @creater: ZHU GUANGYU
- * @modify time: 17/11/23 16:10
+ * @modify time: 17/11/24 18:57
  */
 
-#ifndef _grid_h
-#define _grid_h
+#ifndef GRID_H
+#define GRID_H
 
 #include <vector>
 #include <list>
@@ -19,14 +19,16 @@ class Grid {
 public:
     /* constructor. 
      * Grid be represented by a 2-d bool vector
-     * default size is 50 * 40
+     * size is 50 * 40
      * tmpGrid also be initial at here.
      */
-    Grid(int row = 50, int col = 40); 
+    Grid(); 
 
+/*
     int getRow(); // return the #row
     
     int getColumn(); // return the #column
+*/
 
     /* resize the grid, set all the element to false
      * @parameter: #row, #column
@@ -37,20 +39,19 @@ public:
      * depends on the number of living neighbors, set cell's state.
      * then update the pattern
      */
-    void updateGrid();
+	const vector< vector<bool> >& updateGrid();
 
     /* read a new grid from out
      * update the currLive list at same time.
-     * @parameter: a reference to the input grid. 
+     * @parameter: 2d vector from GridManager's initGrid
      */
     void readFromOut(const vector< vector<bool> > &grid); // change cell's state
 
     /* set all the element's to dead, clear the living cell list
      * does not change the #row and #col
      */
-    void clear();
+    const vector< vector<bool> >& clear();
 
-	vector< vector<bool> >& getGrid();
 
 private:
     // cell structure for store the living cells into list.

@@ -1,21 +1,14 @@
 #include "Grid.h"
 
-Grid::Grid(int row, int col)
+Grid::Grid()
 {
-    if(row != 50 && col != 40) {
-        numOfRow = row;
-        numOfColumn = col;
-        gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
-        tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
-    }
-    else {
         numOfRow = 50;
         numOfColumn = 40;
         gridShow.assign(50, vector<bool>(40, false));
         tmpGrid.assign(50, vector<bool>(40, false));
-    }
 }
 
+/*
 int Grid::getRow()
 {
     return numOfRow;
@@ -25,11 +18,7 @@ int Grid::getColumn()
 {
     return numOfColumn;
 }
-
-vector< vector<bool> >& Grid::getGrid()
-{
-	return gridShow;
-}
+*/
 
 void Grid::resizeGrid(int row, int col)
 {
@@ -39,8 +28,7 @@ void Grid::resizeGrid(int row, int col)
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
 }
-
-void Grid::updateGrid()
+const vector< vector<bool> >& Grid::updateGrid()
 {
     // for find the min block we need to check
     unsigned int min_row = numOfRow - 1;
@@ -79,6 +67,8 @@ void Grid::updateGrid()
 
     currLive = updateCell;
     gridShow = tmpGrid; 
+
+    return gridShow;
 }
 
 void Grid::readFromOut(const vector< vector<bool> > &grid)
@@ -95,11 +85,12 @@ void Grid::readFromOut(const vector< vector<bool> > &grid)
     }
 }
 
-void Grid::clear()
+const vector< vector<bool> >& Grid::clear()
 {
     gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
+    return gridShow;
 }
 
 void Grid::updateHelper(int x, int y, list<struct cell> &tmpList)

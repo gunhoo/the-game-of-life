@@ -165,6 +165,6 @@ void FileManager::saveResult(string fileName, const vector< vector <bool> >& pat
 	myfile.close();
 }
 
-bool FileManager::isModify() {
+void FileManager::isModify() {
 	Modify = true;
 }

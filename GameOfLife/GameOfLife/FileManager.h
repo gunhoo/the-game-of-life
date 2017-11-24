@@ -31,7 +31,7 @@ public:
 
 	void initName();
 
-	bool isModify();
+	void isModify();
 
 private:
 	string FileName;

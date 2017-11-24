@@ -1,6 +1,7 @@
-#pragma once
-
- 
+<<<<<<< Updated upstream
+#ifndef _FileManager_h
+#define _FileMAnager_h
+>>>>>>> Stashed changes
 
 #include <iostream>
 #include <vector>
@@ -13,7 +14,7 @@ using namespace std;
 class FileManager {
 public:
 
-	void New();
+	void newGrid();
 
 	/*
 	save success reuturn 0 (modify == false is also return 0 because don't need to save file)
@@ -23,19 +24,16 @@ public:
 	/*
 		check gridmanager geter and setter inside my code to checi initialization in side funcs
 	*/
-	int Save();
+	int save();
 
-	int SaveAs(string fileName);
+	int saveAs(string fileName);
 	
-	int Load(string fileName);
+	int load(string fileName);
 
 	bool isModify();
 
 private:
 	string FileName;
-	bool Modify = false;
+	bool modify = false;
 };
-
-
-
-#endif // _FileManager_h
+#endif 

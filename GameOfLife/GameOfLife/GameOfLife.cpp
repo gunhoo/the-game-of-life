@@ -22,7 +22,7 @@ int GameOfLife::load(string fileName)
 
 int GameOfLife::save(string fileName)
 {
-	int check = savePart.saveFile(fileName, gridPart.getGrid(), gridPart.getRow(), gridPart.getColumn());
+	int check = .saveFile(fileName, gridPart.getGrid(), gridPart.getRow(), gridPart.getColumn());
     if (check == -22)
         return -22;
     else
@@ -31,25 +31,25 @@ int GameOfLife::save(string fileName)
 
 void GameOfLife::clear()
 {
-    gridPart.clear();
+    gridManager.clear();
 }
 
-void GameOfLife::resizeGrid(int row, int col)
+void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
 {
-    gridPart.resizeGrid(row, col);
+    gridManager.resize(row, col);
 }
 
 void GameOfLife::readFromOut(const vector< vector<bool> > &grid)
 {
-    gridPart.readFromOut(grid);
+    gridManager.readFromOut(grid);
 }
 
-int GameOfLife::getRow()
+unsigned int GameOfLife::getNumOfRow()
 {
-    return gridPart.getRow();
+    return gridManager.getNumOfRow();
 }
 
-int GameOfLife::getCol()
+unsigned int GameOfLife::getNumOfCol()
 {
-    return gridPart.getColumn();
+    return gridManager.getNumOfCol();
 }

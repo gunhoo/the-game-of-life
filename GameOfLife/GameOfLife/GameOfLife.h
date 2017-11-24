@@ -7,9 +7,8 @@
 #ifndef GAMEOFLIFE_H
 #define GAMEOFLIFE_H
 
-#include "Grid.h"
-#include "Save.h"
-#include "Load.h"
+#include "GridManager.h"
+#include "FileManager.h"
 #include <string>
 
 using namespace std;
@@ -34,6 +33,8 @@ public:
      * @parameter: file name
      */
     int save(string fileName);
+    int saveResult(string fileName);
+    int saveAs(string fileName);
 
     /* clear the grid, set all the element to dead.
      * in the grid class, all the gridShow, tmpGrid and currLive are cleared.
@@ -44,20 +45,19 @@ public:
      * all element will be set to false. 
      * @parameter: number of row, number of column
      */ 
-    void resizeGrid(int row, int col);
+    void resizeGrid(unsigned int row, unsigned int col);
 
     /* read grid from GUI 
      * @parameter: the 2d vector of grid
      */
     void readFromOut(const vector< vector<bool> > &grid);
 
-    int getRow(); // return the number of row
-    int getCol(); // return the number of column
+    unsigned int getNumOfRow(); // return the number of row
+    unsigned int getNumOfCol(); // return the number of column
 
 private:
-    Grid gridPart;
-    Save savePart;
-    Load loadPart;
+    GridManager gridManager;
+    FileManager fileManager;
 };
 
 #endif

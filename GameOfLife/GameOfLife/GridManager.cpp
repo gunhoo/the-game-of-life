@@ -14,14 +14,24 @@ void GridManager::setInitGrid(const vector< vector<bool> >& input, unsigned int 
     numOfCol = col;
 }
 
-int GridManager::getNumOfRow()
+const vector< vector<bool> >& GridManager::getSaveGrid()
+{
+    return initGrid;
+}
+
+unsigned int GridManager::getNumOfRow()
 {
     return numOfRow;
 }
 
-int GridManager::getNumOfCol()
+unsigned int GridManager::getNumOfCol()
 {
     return numOfCol;
+}
+
+void GridManager::resize(unsigned int row, unsigned int col)
+{
+    gridUpdate.resizeGrid(row, col);   
 }
 
 const vector< vector<bool> >& GridManager::clear()

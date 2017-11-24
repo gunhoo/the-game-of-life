@@ -23,8 +23,14 @@ public:
      * let load to modify the initGrid
      */
     void setInitGrid(const vector< vector<bool> >& input, unsigned row, unsigned col);
-    int getNumOfRow();
-    int getNumOfCol();
+
+    const vector< vector<bool> >& getSaveGrid();
+    
+    unsigned int getNumOfRow();
+    
+    unsigned int getNumOfCol();
+
+    void resize(unsigned int row, unsigned int col);
 
     /* clear current grid
      * set all the cells to be dead

@@ -33,7 +33,7 @@ public:
     /* resize the grid, set all the element to false
      * @parameter: #row, #column
      */
-    void resizeGrid(int row, int col);
+    void resizeGrid(unsigned int row, unsigned int col);
 
     /* check living cell and its 8 neighbors
      * depends on the number of living neighbors, set cell's state.
@@ -56,31 +56,31 @@ public:
 private:
     // cell structure for store the living cells into list.
     struct cell {
-        int x;
-        int y;
+        unsigned int row;
+        unsigned int col;
 
-        cell(int _x, int _y): x(_x), y(_y){}
+        cell(unsigned int _x, unsigned int _y): row(_x), col(_y){}
 
         inline cell& operator=(const cell& source) {
-            this->x = source.x;
-            this->y = source.y;
+            this->row = source.row;
+            this->col = source.col;
 
             return *this;
         }
 
         inline cell(const cell& source) {
-            x = source.x;
-            y = source.y;
+            row = source.row;
+            col = source.col;
         }
     };
 
-    int numOfRow;
-    int numOfColumn;
+    unsigned int numOfRow;
+    unsigned int numOfColumn;
     vector< vector<bool> > gridShow;
     vector< vector<bool> > tmpGrid; // a temperary grid for helping generate next pattern
     list<struct cell> currLive; // a list for store all the living cells
 
-    void updateHelper(int x, int y, list<struct cell> &tmpList); // function which check the living cells around a cell
+    void updateHelper(unsigned int row, unsigned int col, list<struct cell> &tmpList); // function which check the living cells around a cell
 
     /* found the minimal block we need to check.
      * thus we can reduce the check which count the living cells.

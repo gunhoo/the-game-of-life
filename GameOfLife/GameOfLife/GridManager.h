@@ -22,7 +22,10 @@ public:
     /* pass grid's referenec
      * let load to modify the initGrid
      */
-    void setInitGrid(const vector< vector<bool> >& input, unsigned row, unsigned col);
+    vector< vector<bool> >& setInitGrid();
+    
+    unsigned int& setRow();
+    unsigned int& setCol();
 
     const vector< vector<bool> >& getSaveGrid();
     

@@ -20,8 +20,6 @@ public:
 	*/
 	int load(string fileName, vector< vector <bool> >& input, unsigned int& row, unsigned int& col);
 
-	void newGrid(vector< vector <bool> >& newGrid, unsigned int& row, unsigned int& col);
-
 	/*
 		return -1: new -> save gui should run just like save as is pushed
 	*/
@@ -30,6 +28,8 @@ public:
 	int saveAs(string fileName, const vector< vector <bool> >& grid, unsigned int row, unsigned int col);
 
 	void saveResult(string fileName, const vector< vector <bool> >& pattern, unsigned int row, unsigned int col);
+
+	void initName();
 
 	bool isModify();
 

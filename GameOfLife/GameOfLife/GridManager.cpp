@@ -58,6 +58,7 @@ void GridManager::newGrid()
     numOfRow = 50;
     numOfCol = 40;
     initGrid.assign(numOfRow, vector<bool>(numOfCol, false));
+    gridUpdate.resizeGrid(50, 40);
 }
 
 const vector< vector<bool> >& GridManager::generateGrid()

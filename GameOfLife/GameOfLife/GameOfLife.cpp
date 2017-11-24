@@ -51,6 +51,14 @@ const vector<vector<bool> >& GameOfLife::clear()
     return gridManager.clear();
 }
 
+const vector< vector<bool> >& GameOfLife::newGrid()
+{
+    gridManager.newGrid();
+    fileManager.initName();
+
+    return gridManager.getPattern();
+}
+
 void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
 {
     gridManager.resize(row, col);

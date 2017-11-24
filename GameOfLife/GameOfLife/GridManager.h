@@ -27,7 +27,7 @@ public:
     unsigned int& setRow();
     unsigned int& setCol();
 
-    const vector< vector<bool> >& getSaveGrid();
+    vector< vector<bool> >& getSaveGrid();
     
     unsigned int getNumOfRow();
     

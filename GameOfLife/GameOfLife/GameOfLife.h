@@ -45,6 +45,11 @@ public:
      */
     const vector< vector<bool> >& clear();
 
+    /* create a new default grid
+     * all the 
+     */
+    const vector< vector<bool> >& newGrid();
+
     /* give the new row and col number to resize the grid
      * all element will be set to false. 
      * @parameter: number of row, number of column

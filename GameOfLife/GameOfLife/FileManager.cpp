@@ -64,13 +64,8 @@ int FileManager::load(string fileName, vector< vector <bool> >& input, unsigned 
 	return 0;
 }
 
-void FileManager::newGrid(vector< vector <bool> >& newGrid, unsigned int& row, unsigned int& col)
+void FileManager::initName()
 {
-	row = 50;
-	col = 40;
-
-	newGrid.assign(row, vector<bool>(col, false));
-
 	FileName = "untitle.txt";
 }
 

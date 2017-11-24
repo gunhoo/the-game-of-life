@@ -22,12 +22,9 @@ public:
     /* pass grid's referenec
      * let load to modify the initGrid
      */
-    vector< vector<bool> > & getInitGrid();
+    void setInitGrid(const vector< vector<bool> >& input, unsigned row, unsigned col);
     int getNumOfRow();
     int getNumOfCol();
-
-    void setNumOfRow(unsigned int row);
-    void setNumOfCol(unsigned int col);
 
     /* clear current grid
      * set all the cells to be dead

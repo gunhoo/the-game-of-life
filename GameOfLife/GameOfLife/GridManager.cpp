@@ -7,9 +7,11 @@ GridManager::GridManager()
         initGrid.assign(50, vector<bool>(40, false));
 }
 
-vector< vector<bool> > & GridManager::getInitGrid()
+void GridManager::setInitGrid(const vector< vector<bool> >& input, unsigned int row, unsigned int col)
 {
-    return initGrid;
+    initGrid = input;
+    numOfRow = row;
+    numOfCol = col;
 }
 
 int GridManager::getNumOfRow()
@@ -20,16 +22,6 @@ int GridManager::getNumOfRow()
 int GridManager::getNumOfCol()
 {
     return numOfCol;
-}
-
-void GridManager::setNumOfRow(unsigned int row)
-{
-    numOfRow = row;
-}
-
-void GridManager::setNumOfCol(unsigned int col)
-{
-    numOfCol = col;
 }
 
 const vector< vector<bool> >& GridManager::clear()

@@ -1,6 +1,6 @@
 #include "FileManager.h"
 
-int FileManager::Load(string fileName) {
+int FileManager::load(string fileName) {
 
 	FileName = fileName;
 
@@ -72,7 +72,7 @@ int FileManager::Load(string fileName) {
 
 }
 
-int FileManager::SaveAs(string fileName) {
+int FileManager::saveAs(string fileName) {
 
 	//don't need to implement modify exception user can want save same data in different text file.
 
@@ -109,7 +109,43 @@ int FileManager::SaveAs(string fileName) {
 	return 0; //success
 }
 
-void FileManager::New()
+int FileManager::saveResult(string fileName) {
+	
+	//get values from Grid function
+	vector< vector <bool> > tmp = ;
+	unsigned int row = getNumOfRow();
+	unsigned int col = getNumOfCol();
+
+	if (FileName == fileName) {
+		// user wants to save the new file to old file we'd better ask about  user want overwriting or not.
+		return -1;
+	}
+
+	ofstream myfile;
+	myfile.open(fileName);
+
+	myfile << row;
+	myfile << "\n";
+	myfile << col;
+	myfile << "\n";
+
+	for (int cur_x = 0; cur_x < row; cur_x++) {
+		for (int cur_y = 0; cur_y < col; cur_y++) {
+			if (tmp[cur_x][cur_y]) {
+				myfile << "X";
+			}
+			else {
+				myfile << "-";
+			}
+
+		}
+		myfile << "\n";
+	}
+	myfile.close();
+	return 0; //success
+}
+
+void FileManager::newGrid()
 {
 	/*
 		1: grid row col FileName 초기화 해주기 끝?? 
@@ -127,7 +163,7 @@ void FileManager::New()
 	FileName = "untitle.txt";
 }
 
-int FileManager::Save() {
+int FileManager::save() {
 
 	//if user click new after click save CUI must give new filename value 
 	if (FileName == "untitle.txt" && Modify == true) {

@@ -77,6 +77,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_initialview.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="gamewidget.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_gamewidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_gamewidget.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gameoflifeview.h">
@@ -93,6 +102,9 @@
     </CustomBuild>
     <CustomBuild Include="initialview.ui">
       <Filter>Form Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="gamewidget.h">
+      <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>

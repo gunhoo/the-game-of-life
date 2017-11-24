@@ -5,6 +5,7 @@
 #include "ui_gameoflifeview.h"
 #include "initialview.h"
 #include "GameOfLife.h"
+#include "gamewidget.h"
 
 class GameOfLifeView : public QMainWindow
 {
@@ -23,9 +24,10 @@ private slots:
 	void quitButtonClicked();
 
 private:
-	Ui::GameOfLifeViewClass ui;
+	Ui::GameOfLifeViewClass *ui;
 	InitialView *initialView;
 	GameOfLife *gameOfLife;
+	GameWidget* game;
 
 	void GameOfLifeView::loadFile(QString fileName);
 };

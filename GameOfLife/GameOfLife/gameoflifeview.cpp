@@ -4,18 +4,24 @@
 #include <qaction.h>
 
 GameOfLifeView::GameOfLifeView(QWidget *parent)
-	: QMainWindow(parent)
+	: QMainWindow(parent),
+	ui(new Ui::GameOfLifeViewClass),
+	game(new GameWidget(this))
 {
-	ui.setupUi(this);
+	ui->setupUi(this);
 
 	// initialize GameOfLife
 	gameOfLife = new GameOfLife();
 
-	connect(ui.actionNew, SIGNAL(triggered()), this, SLOT(newButtonClicked()));
-	connect(ui.actionOpen, SIGNAL(triggered()), this, SLOT(openButtonClicked()));
-	connect(ui.actionSave, SIGNAL(triggered()), this, SLOT(saveButtonClicked()));
-	connect(ui.actionSave_As, SIGNAL(triggered()), this, SLOT(saveAsButtonClicked()));
-	connect(ui.actionQuit, SIGNAL(triggered()), this, SLOT(quitButtonClicked()));
+	connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(newButtonClicked()));
+	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openButtonClicked()));
+	connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveButtonClicked()));
+	connect(ui->actionSave_As, SIGNAL(triggered()), this, SLOT(saveAsButtonClicked()));
+	connect(ui->actionQuit, SIGNAL(triggered()), this, SLOT(quitButtonClicked()));
+
+	connect(ui->clearButton, SIGNAL(clicked()), game, SLOT(clear()));
+
+	ui->gameLayout->addWidget(game);
 }
 
 GameOfLifeView::~GameOfLifeView()

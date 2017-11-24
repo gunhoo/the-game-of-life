@@ -23,6 +23,7 @@
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
+#include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 
 QT_BEGIN_NAMESPACE
@@ -49,6 +50,8 @@ public:
     QPushButton *nextButton;
     QPushButton *stopButton;
     QPushButton *clearButton;
+    QWidget *verticalLayoutWidget;
+    QVBoxLayout *gameLayout;
     QMenuBar *menuBar;
     QMenu *menuFile;
     QToolBar *mainToolBar;
@@ -157,10 +160,15 @@ public:
 
         horizontalLayout_2->addWidget(clearButton);
 
+        verticalLayoutWidget = new QWidget(centralWidget);
+        verticalLayoutWidget->setObjectName(QStringLiteral("verticalLayoutWidget"));
+        verticalLayoutWidget->setGeometry(QRect(10, 90, 431, 301));
+        gameLayout = new QVBoxLayout(verticalLayoutWidget);
+        gameLayout->setSpacing(6);
+        gameLayout->setContentsMargins(11, 11, 11, 11);
+        gameLayout->setObjectName(QStringLiteral("gameLayout"));
+        gameLayout->setContentsMargins(0, 0, 0, 0);
         GameOfLifeViewClass->setCentralWidget(centralWidget);
-        horizontalLayoutWidget->raise();
-        universeSizeX->raise();
-        horizontalLayoutWidget_2->raise();
         menuBar = new QMenuBar(GameOfLifeViewClass);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 450, 21));

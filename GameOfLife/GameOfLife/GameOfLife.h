@@ -21,6 +21,10 @@ public:
     void updateGrid();
 	const vector< vector<bool> >& getGrid();
 
+    const vector< vector<bool> >& run();
+
+    const vector< vector<bool> >& next();
+
     /* return value to check if we open file successful
      * -11 means the file format not match
      * @parameter: file name
@@ -33,13 +37,13 @@ public:
      * @parameter: file name
      */
     int save(string fileName);
-    int saveResult(string fileName);
+    void saveResult(string fileName);
     int saveAs(string fileName);
 
     /* clear the grid, set all the element to dead.
      * in the grid class, all the gridShow, tmpGrid and currLive are cleared.
      */
-    void clear();
+    const vector< vector<bool> >& clear();
 
     /* give the new row and col number to resize the grid
      * all element will be set to false. 

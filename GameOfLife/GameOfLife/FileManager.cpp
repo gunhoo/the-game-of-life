@@ -1,16 +1,14 @@
 #include "FileManager.h"
 
-int FileManager::load(string fileName) {
+int FileManager::load(string fileName, vector< vector <bool> >& input, unsigned int& row, unsigned int& col) {
 
 	FileName = fileName;
 
 	ifstream inFile;
 	inFile.open(fileName);
 
-	//get it from grid manager
-	vector< vector <bool> > tmp;
-	unsigned int row = 0;
-	unsigned int col = 0;
+	row = 0;
+	col = 0;
 
 	std::string str;
 
@@ -19,17 +17,15 @@ int FileManager::load(string fileName) {
 		if (str[0] == '#') {
 			row = 0;
 		}
-		else {						//if this line is not comment line
+		else {						
 			if (!isdigit(str[0])) {
-				cout << "wrong format" << endl;
 				return -11;
 			}
 			stringstream geek(str);	//change string value to int value
-			geek >> row;				//put it in x
+			geek >> row;			
 		}
 	}
 
-	//get y value
 	std::getline(inFile, str);
 	if (!isdigit(str[0])) {
 		cout << "wrong format" << endl;
@@ -38,148 +34,59 @@ int FileManager::load(string fileName) {
 	stringstream geek(str);
 	geek >> col;
 
-	tmp.assign(row, vector<bool>(col, false));			//check
+	input.assign(row, vector<bool>(col, false));			
 
 	int cur_x = 0;
 	int cur_y = 0;
 	char element;
-	while (std::getline(inFile, str)) //read one line
+	while (std::getline(inFile, str)) 
 	{
 
-		while (element = str[cur_y]) {	//read string character by character
-			if (element == '-') {	//if character is - put - in table
-				tmp[cur_x][cur_y] = false;
-				cur_y++;				// and move y ¡¬«•
+		while (element = str[cur_y]) {	
+			if (element == '-') {	
+				input[cur_x][cur_y] = false;
+				cur_y++;				
 			}
 			else if (element == 'X') {
-				tmp[cur_x][cur_y] = true;
-				cur_y++;				//and move y ¡¬«•
+				input[cur_x][cur_y] = true;
+				cur_y++;				 
 			}
 			else {
-				cout << "wrong format" << endl;
 				return -11;
 			}
 		}
-		cur_x++;						//move x ¡¬«•
-		cur_y = 0;						//reset y ¡¬«•
+		cur_x++;						
+		cur_y = 0;				
 	}
 
-	setInitGrid(tmp, row, col);
 
 	inFile.close();
-	return 0; // success
-
-
+	return 0;
 }
 
-int FileManager::saveAs(string fileName) {
-
-	//don't need to implement modify exception user can want save same data in different text file.
-
-	vector< vector <bool> > tmp = getSaveGrid();
-	unsigned int row = getNumOfRow();
-	unsigned int col = getNumOfCol();
-
-	if (FileName == fileName) {
-		// user wants to save the new file to old file we'd better ask about  user want overwriting or not.
-		return -1;
-	}
-
-	ofstream myfile;
-	myfile.open(fileName);
-
-	myfile << row;
-	myfile << "\n";
-	myfile << col;
-	myfile << "\n";
-
-	for (int cur_x = 0; cur_x < row; cur_x++) {
-		for (int cur_y = 0; cur_y < col; cur_y++) {
-			if (tmp[cur_x][cur_y]) {
-				myfile << "X";
-			}
-			else {
-				myfile << "-";
-			}
-
-		}
-		myfile << "\n";
-	}
-	myfile.close();
-	return 0; //success
-}
-
-int FileManager::saveResult(string fileName) {
-	
-	//get values from Grid function
-	vector< vector <bool> > tmp = ;
-	unsigned int row = getNumOfRow();
-	unsigned int col = getNumOfCol();
-
-	if (FileName == fileName) {
-		// user wants to save the new file to old file we'd better ask about  user want overwriting or not.
-		return -1;
-	}
-
-	ofstream myfile;
-	myfile.open(fileName);
-
-	myfile << row;
-	myfile << "\n";
-	myfile << col;
-	myfile << "\n";
-
-	for (int cur_x = 0; cur_x < row; cur_x++) {
-		for (int cur_y = 0; cur_y < col; cur_y++) {
-			if (tmp[cur_x][cur_y]) {
-				myfile << "X";
-			}
-			else {
-				myfile << "-";
-			}
-
-		}
-		myfile << "\n";
-	}
-	myfile.close();
-	return 0; //success
-}
-
-void FileManager::newGrid()
+void FileManager::newGrid(vector< vector <bool> >& newGrid, unsigned int& row, unsigned int& col)
 {
-	/*
-		1: grid row col FileName √ ±‚»≠ «ÿ¡÷±‚ ≥°?? 
-	*/
-	
-	vector< vector <bool> > tmp;
+	row = 50;
+	col = 40;
 
-	unsigned int row = 50;
-	unsigned int col = 40;
-
-	tmp.assign(row, vector<bool>(col, false));
-
-	setInitGrid(tmp, row, col);
+	newGrid.assign(row, vector<bool>(col, false));
 
 	FileName = "untitle.txt";
 }
 
-int FileManager::save() {
+int FileManager::save(const vector< vector <bool> >& grid, unsigned int row, unsigned int col) {
 
 	//if user click new after click save CUI must give new filename value 
 	if (FileName == "untitle.txt" && Modify == true) {
 		string newfile;
-		SaveAs(newfile);
-		return 0;
+		saveAs(newfile, grid, row, col);
+		return -1;
 	}
 
 	if (Modify == false) {
 		//file does not change at all
 		return 0;
 	}
-
-	vector< vector <bool> > tmp = getSaveGrid();
-	unsigned int row = getNumOfRow();
-	unsigned int col = getNumOfCol();
 
 	ofstream myfile;
 	myfile.open(FileName);
@@ -191,7 +98,7 @@ int FileManager::save() {
 
 	for (int cur_x = 0; cur_x < row; cur_x++) {
 		for (int cur_y = 0; cur_y < col; cur_y++) {
-			if (tmp[cur_x][cur_y]) {
+			if (grid[cur_x][cur_y]) {
 				myfile << "X";
 			}
 			else {
@@ -203,6 +110,64 @@ int FileManager::save() {
 	}
 	myfile.close();
 	return 0; //success
+}
+
+int FileManager::saveAs(string fileName, const vector< vector <bool> >& grid, unsigned int row, unsigned int col) {
+
+	//don't need to implement modify exception user can want save same data in different text file.
+
+	if (FileName == fileName) {
+		// user wants to save the new file to old file we'd better ask about  user want overwriting or not.
+		return -1;
+	}
+
+	ofstream myfile;
+	myfile.open(fileName);
+
+	myfile << row;
+	myfile << "\n";
+	myfile << col;
+	myfile << "\n";
+
+	for (int cur_x = 0; cur_x < row; cur_x++) {
+		for (int cur_y = 0; cur_y < col; cur_y++) {
+			if (grid[cur_x][cur_y]) {
+				myfile << "X";
+			}
+			else {
+				myfile << "-";
+			}
+
+		}
+		myfile << "\n";
+	}
+	myfile.close();
+	return 0; //success
+}
+
+void FileManager::saveResult(string fileName, const vector< vector <bool> >& pattern, unsigned int row, unsigned int col) {
+
+	ofstream myfile;
+	myfile.open(fileName);
+
+	myfile << row;
+	myfile << "\n";
+	myfile << col;
+	myfile << "\n";
+
+	for (int cur_x = 0; cur_x < row; cur_x++) {
+		for (int cur_y = 0; cur_y < col; cur_y++) {
+			if (pattern[cur_x][cur_y]) {
+				myfile << "X";
+			}
+			else {
+				myfile << "-";
+			}
+
+		}
+		myfile << "\n";
+	}
+	myfile.close();
 }
 
 bool FileManager::isModify() {

@@ -1,7 +1,5 @@
-<<<<<<< Updated upstream
-#ifndef _FileManager_h
-#define _FileMAnager_h
->>>>>>> Stashed changes
+#ifndef FILEMANAGER_H
+#define FILEMANAGER_H
 
 #include <iostream>
 #include <vector>
@@ -14,26 +12,32 @@ using namespace std;
 class FileManager {
 public:
 
-	void newGrid();
+
 
 	/*
 	save success reuturn 0 (modify == false is also return 0 because don't need to save file)
 	In save as function if filename is already exsist return -1;
 	*/
+	int load(string fileName, vector< vector <bool> >& input, unsigned int& row, unsigned int& col);
+
+	void newGrid(vector< vector <bool> >& newGrid, unsigned int& row, unsigned int& col);
 
 	/*
-		check gridmanager geter and setter inside my code to checi initialization in side funcs
+		return -1: new -> save gui should run just like save as is pushed
 	*/
-	int save();
+	int save(const vector< vector <bool> >& grid, unsigned int row, unsigned int col);
 
-	int saveAs(string fileName);
-	
-	int load(string fileName);
+	int saveAs(string fileName, const vector< vector <bool> >& grid, unsigned int row, unsigned int col);
+
+	void saveResult(string fileName, const vector< vector <bool> >& pattern, unsigned int row, unsigned int col);
 
 	bool isModify();
 
 private:
 	string FileName;
-	bool modify = false;
+	//modify false = not chage		modify true = changed
+	bool Modify = false;
+
 };
-#endif 
+
+#endif

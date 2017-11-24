@@ -53,5 +53,6 @@ void GridManager::newGrid()
 
 const vector< vector<bool> >& GridManager::generateGrid()
 {
+    gridUpdate.readFromOut(initGrid);
     return gridUpdate.updateGrid();
 }

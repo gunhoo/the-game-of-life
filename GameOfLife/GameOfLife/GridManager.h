@@ -27,6 +27,9 @@ public:
     int getNumOfRow();
     int getNumOfCol();
 
+    void setNumOfRow(unsigned int row);
+    void setNumOfCol(unsigned int col);
+
     /* clear current grid
      * set all the cells to be dead
      */
@@ -37,10 +40,12 @@ public:
      */
     void newGrid();
 
+    const vector< vector<bool> >& generateGrid();
+
 private:
     vector< vector<bool> > initGrid;
-    int numOfRow;
-    int numOfCol;
+    unsigned int numOfRow;
+    unsigned int numOfCol;
 
     Grid gridUpdate;
 };

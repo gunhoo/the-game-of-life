@@ -29,6 +29,16 @@ int GridManager::getNumOfCol()
     return numOfCol;
 }
 
+void GridManager::setNumOfRow(unsigned int row)
+{
+    numOfRow = row;
+}
+
+void GridManager::setNumOfCol(unsigned int col)
+{
+    numOfCol = col;
+}
+
 void GridManager::clear()
 {
     gridUpdate.clear();
@@ -39,4 +49,9 @@ void GridManager::newGrid()
     numOfRow = 50;
     numOfCol = 40;
     initGrid.assign(numOfRow, vector<bool>(numOfCol, false));
+}
+
+const vector< vector<bool> >& GridManager::generateGrid()
+{
+    return gridUpdate.updateGrid();
 }

@@ -20,6 +20,29 @@ GameWidget::~GameWidget()
 	delete[] universe;
 }
 
+void GameWidget::setUniverseWithGrid(vector< vector<bool> > grid) {
+
+	int row = grid.size();
+	int col = grid[0].size();
+
+	if (row != this->universeSizeY || col != this->universeSizeX) {
+		this->universeSizeY = row;
+		this->universeSizeX = col;
+		// call re-size method
+		// this->resizeUniverse();
+	}
+
+	for (int i = 0; i < universeSizeX; i++) {
+		for (int j = 0; j < universeSizeY; j++) {
+			universe[(j + 1) * universeSizeX + (i + 1)] =
+				&grid[i][j];
+		}
+	}
+
+	update();
+
+}
+
 
 void GameWidget::clear()
 {

@@ -108,5 +108,8 @@ void GameOfLifeView::loadFile(QString fileName)
 		warningBox.setDefaultButton(QMessageBox::Ok);
 
 		warningBox.exec();
+		
+		// Get grid of loaded file initial grid
+		game->setUniverseWithGrid(gameOfLife->getGrid());
 	}
 }

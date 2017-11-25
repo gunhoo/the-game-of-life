@@ -70,3 +70,13 @@ const vector< vector<bool> >& GridManager::getPattern()
 {
     return gridUpdate.getPattern();
 }
+
+void GridManager::setByClick(unsigned int row, unsigned  int col, vector< vector<bool> >& grid)
+{
+    if (grid[row][col])
+        grid[row][col] = false;
+    else
+        gir[row][col] = true;
+    
+    gridUpdate.changeStatus(row, col);
+}

@@ -51,6 +51,12 @@ public:
      */ 
     void resizeGrid(unsigned int row, unsigned int col);
 
+    /* change cell's status depends on click on GUI
+     * will change the GridManager's initGrid and Grid's gridShow at sametime
+     * @parameter: coordinations from GUI grid
+     * */
+    void setByClick(unsigned int row, unsigned int col);
+
     unsigned int getNumOfRow(); // return the number of row
     unsigned int getNumOfCol(); // return the number of column
 

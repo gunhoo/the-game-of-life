@@ -20,6 +20,7 @@ GameWidget::~GameWidget()
 	delete[] universe;
 }
 
+
 void GameWidget::setUniverseWithGrid(vector< vector<bool> > grid) {
 
 	int row = grid.size();
@@ -42,7 +43,6 @@ void GameWidget::setUniverseWithGrid(vector< vector<bool> > grid) {
 	update();
 
 }
-
 
 void GameWidget::clear()
 {

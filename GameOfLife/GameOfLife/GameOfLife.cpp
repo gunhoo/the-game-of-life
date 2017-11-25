@@ -10,46 +10,72 @@ const vector< vector<bool> >& GameOfLife::getGrid()
     return gridPart.getGrid();
 }
 
+const vector< vector<bool> >& GameOfLife::run()
+{
+    // need to finish the while loop and stop
+    return gridManager.generateGrid();   
+}
+
+const vector< vector<bool> >& GameOfLife::next()
+{
+    return gridManager.generateGrid();
+}
+
 int GameOfLife::load(string fileName)
 {
-    int check = loadPart.loadFile(fileName); 
+    int check = fileManager.load(fileName, gridManager.setInitGrid(), gridManager.setRow(), gridManager.setCol()); 
     if (check == -11)
         return -11;
 
-    gridPart.resizeGrid(loadPart.getRow(), loadPart.getCol());
-    gridPart.readFromOut(loadPart.getGrid());
+    gridManager.resize(gridManager.getNumOfRow(), gridManager.getNumOfCol());
+    gridManager.setGnrtGrid(gridManager.getSaveGrid());
 }
 
 int GameOfLife::save(string fileName)
 {
-	int check = savePart.saveFile(fileName, gridPart.getGrid(), gridPart.getRow(), gridPart.getColumn());
-    if (check == -22)
-        return -22;
-    else
-        return 0;
+	return fileManager.save(gridManager.getSaveGrid(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-void GameOfLife::clear()
+int GameOfLife::saveAs(string fileName)
 {
-    gridPart.clear();
+    return fileManager.saveAs(fileName, gridManager.getSaveGrid(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-void GameOfLife::resizeGrid(int row, int col)
+void GameOfLife::saveResult(string fileName)
 {
-    gridPart.resizeGrid(row, col);
+    fileManager.saveResult(fileName, gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
+const vector<vector<bool> >& GameOfLife::clear()
+{
+    return gridManager.clear();
+}
+
+const vector< vector<bool> >& GameOfLife::newGrid()
+{
+    gridManager.newGrid();
+    fileManager.initName();
+
+    return gridManager.getPattern();
+}
+
+void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
+{
+    gridManager.resize(row, col);
+}
+/*
 void GameOfLife::readFromOut(const vector< vector<bool> > &grid)
 {
-    gridPart.readFromOut(grid);
+    gridManager.readFromOut(grid);
+}
+*/
+
+unsigned int GameOfLife::getNumOfRow()
+{
+    return gridManager.getNumOfRow();
 }
 
-int GameOfLife::getRow()
+unsigned int GameOfLife::getNumOfCol()
 {
-    return gridPart.getRow();
-}
-
-int GameOfLife::getCol()
-{
-    return gridPart.getColumn();
+    return gridManager.getNumOfCol();
 }

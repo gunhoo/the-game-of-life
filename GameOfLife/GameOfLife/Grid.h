@@ -3,11 +3,11 @@
  * provide the grid, update cell's state
  * associate with Load and Store class to input or output data file.
  * @creater: ZHU GUANGYU
- * @modify time: 17/11/23 16:10
+ * @modify time: 17/11/24 18:57
  */
 
-#ifndef _grid_h
-#define _grid_h
+#ifndef GRID_H
+#define GRID_H
 
 #include <vector>
 #include <list>
@@ -19,67 +19,69 @@ class Grid {
 public:
     /* constructor. 
      * Grid be represented by a 2-d bool vector
-     * default size is 50 * 40
+     * size is 50 * 40
      * tmpGrid also be initial at here.
      */
-    Grid(int row = 50, int col = 40); 
+    Grid(); 
 
+/*
     int getRow(); // return the #row
     
     int getColumn(); // return the #column
+*/
 
     /* resize the grid, set all the element to false
      * @parameter: #row, #column
      */
-    void resizeGrid(int row, int col);
+    void resizeGrid(unsigned int row, unsigned int col);
 
     /* check living cell and its 8 neighbors
      * depends on the number of living neighbors, set cell's state.
      * then update the pattern
      */
-    void updateGrid();
+	const vector< vector<bool> >& updateGrid();
 
     /* read a new grid from out
      * update the currLive list at same time.
-     * @parameter: a reference to the input grid. 
+     * @parameter: 2d vector from GridManager's initGrid
      */
-    void readFromOut(const vector< vector<bool> > &grid); // change cell's state
+    void setGnrtGrid(const vector< vector<bool> > &grid); // change cell's state
 
     /* set all the element's to dead, clear the living cell list
      * does not change the #row and #col
      */
-    void clear();
+    const vector< vector<bool> >& clear();
 
-	vector< vector<bool> >& getGrid();
+    const vector< vector<bool> >& getPattern();
 
 private:
     // cell structure for store the living cells into list.
     struct cell {
-        int x;
-        int y;
+        unsigned int row;
+        unsigned int col;
 
-        cell(int _x, int _y): x(_x), y(_y){}
+        cell(unsigned int _x, unsigned int _y): row(_x), col(_y){}
 
         inline cell& operator=(const cell& source) {
-            this->x = source.x;
-            this->y = source.y;
+            this->row = source.row;
+            this->col = source.col;
 
             return *this;
         }
 
         inline cell(const cell& source) {
-            x = source.x;
-            y = source.y;
+            row = source.row;
+            col = source.col;
         }
     };
 
-    int numOfRow;
-    int numOfColumn;
+    unsigned int numOfRow;
+    unsigned int numOfColumn;
     vector< vector<bool> > gridShow;
     vector< vector<bool> > tmpGrid; // a temperary grid for helping generate next pattern
     list<struct cell> currLive; // a list for store all the living cells
 
-    void updateHelper(int x, int y, list<struct cell> &tmpList); // function which check the living cells around a cell
+    void updateHelper(unsigned int row, unsigned int col, list<struct cell> &tmpList); // function which check the living cells around a cell
 
     /* found the minimal block we need to check.
      * thus we can reduce the check which count the living cells.

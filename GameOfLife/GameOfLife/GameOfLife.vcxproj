@@ -34,7 +34,11 @@
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
+<<<<<<< HEAD
     <PlatformToolset>v120</PlatformToolset>
+=======
+    <PlatformToolset>v140</PlatformToolset>
+>>>>>>> a939e47fdc6207439b6ad23878bed67e40111b4a
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
     <ConfigurationType>Application</ConfigurationType>
@@ -138,6 +142,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="FileManager.cpp" />
     <ClCompile Include="GameOfLife.cpp" />
     <ClCompile Include="gameoflifeview.cpp" />
     <ClCompile Include="gamewidget.cpp" />
@@ -176,10 +181,9 @@
       <ExcludedFromBuild Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</ExcludedFromBuild>
     </ClCompile>
     <ClCompile Include="Grid.cpp" />
+    <ClCompile Include="GridManager.cpp" />
     <ClCompile Include="initialview.cpp" />
-    <ClCompile Include="Load.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Save.cpp" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gameoflifeview.h">
@@ -222,6 +226,7 @@
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="FileManager.h" />
     <ClInclude Include="GameOfLife.h" />
     <CustomBuild Include="gamewidget.h">
       <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">$(QTDIR)\bin\moc.exe;%(FullPath)</AdditionalInputs>
@@ -262,8 +267,7 @@
       <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">.\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp</Outputs>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">"$(QTDIR)\bin\moc.exe"  "%(FullPath)" -o ".\GeneratedFiles\$(ConfigurationName)\moc_%(Filename).cpp"  -DUNICODE -DWIN32 -DQT_NO_DEBUG -DNDEBUG -DQT_CORE_LIB -DQT_GUI_LIB -DQT_WIDGETS_LIB  "-I.\GeneratedFiles" "-I." "-I$(QTDIR)\include" "-I.\GeneratedFiles\$(ConfigurationName)\." "-I$(QTDIR)\include\QtCore" "-I$(QTDIR)\include\QtGui" "-I$(QTDIR)\include\QtWidgets"</Command>
     </CustomBuild>
-    <ClInclude Include="Load.h" />
-    <ClInclude Include="Save.h" />
+    <ClInclude Include="GridManager.h" />
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="gameoflifeview.qrc">

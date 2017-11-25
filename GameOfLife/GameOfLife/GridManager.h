@@ -2,7 +2,7 @@
  * Store the file data read from data file
  * pass data to Grid, let it update the pattern
  * @authot: ZHU GUANGYU
- * @modify time: 17/11/24 15:54
+ * @modify time: 17/11/25 10:40
  */
 
 #ifndef GRIDMANAGER_H
@@ -27,7 +27,7 @@ public:
     unsigned int& setRow();
     unsigned int& setCol();
 
-    vector< vector<bool> >& getSaveGrid();
+    const vector< vector<bool> >& getSaveGrid();
     
     unsigned int getNumOfRow();
     
@@ -50,6 +50,8 @@ public:
     const vector< vector<bool> >& generateGrid();
 
     const vector< vector<bool> >& getPattern();
+
+    void setByClick(unsigned int row, unsigned  int col, vector< vector<bool> >& grid);
 
 
 private:

@@ -15,12 +15,7 @@ using namespace std;
 
 class GameOfLife {
 public:
-    /* get the next generated pattern
-     * then use getGrid() again can fetch the new pattern
-     */
-    void updateGrid();
-	const vector< vector<bool> >& getGrid();
-
+    
     const vector< vector<bool> >& run();
 
     const vector< vector<bool> >& next();
@@ -56,10 +51,11 @@ public:
      */ 
     void resizeGrid(unsigned int row, unsigned int col);
 
-    /* read grid from GUI 
-     * @parameter: the 2d vector of grid
-     */
-    void readFromOut(const vector< vector<bool> > &grid);
+    /* change cell's status depends on click on GUI
+     * will change the GridManager's initGrid and Grid's gridShow at sametime
+     * @parameter: coordinations from GUI grid
+     * */
+    void setByClick(unsigned int row, unsigned int col);
 
     unsigned int getNumOfRow(); // return the number of row
     unsigned int getNumOfCol(); // return the number of column

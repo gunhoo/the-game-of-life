@@ -1,15 +1,5 @@
 #include "GameOfLife.h"
 
-void GameOfLife::updateGrid()
-{
-    gridPart.updateGrid();
-}
-
-const vector< vector<bool> >& GameOfLife::getGrid()
-{
-    return gridPart.getGrid();
-}
-
 const vector< vector<bool> >& GameOfLife::run()
 {
     // need to finish the while loop and stop
@@ -29,6 +19,8 @@ int GameOfLife::load(string fileName)
 
     gridManager.resize(gridManager.getNumOfRow(), gridManager.getNumOfCol());
     gridManager.setGnrtGrid(gridManager.getSaveGrid());
+
+	return 0;
 }
 
 int GameOfLife::save(string fileName)
@@ -63,12 +55,6 @@ void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
 {
     gridManager.resize(row, col);
 }
-/*
-void GameOfLife::readFromOut(const vector< vector<bool> > &grid)
-{
-    gridManager.readFromOut(grid);
-}
-*/
 
 unsigned int GameOfLife::getNumOfRow()
 {

@@ -145,3 +145,4 @@ CMakeLists.txt.user*
 
 # Qt Creator backups
 GameOfLife/GameOfLife.VC.db
+GameOfLife/GameOfLife.sdf

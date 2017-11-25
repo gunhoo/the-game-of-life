@@ -1,55 +1,67 @@
 #include "GameOfLife.h"
 
-void GameOfLife::updateGrid()
+const vector< vector<bool> >& GameOfLife::run()
 {
-    gridPart.updateGrid();
+    // need to finish the while loop and stop
+    return gridManager.generateGrid();   
 }
 
-const vector< vector<bool> >& GameOfLife::getGrid()
+const vector< vector<bool> >& GameOfLife::next()
 {
-    return gridPart.getGrid();
+    return gridManager.generateGrid();
 }
 
 int GameOfLife::load(string fileName)
 {
-    int check = loadPart.loadFile(fileName); 
+    int check = fileManager.load(fileName, gridManager.setInitGrid(), gridManager.setRow(), gridManager.setCol()); 
     if (check == -11)
         return -11;
 
-    gridPart.resizeGrid(loadPart.getRow(), loadPart.getCol());
-    gridPart.readFromOut(loadPart.getGrid());
+    gridManager.resize(gridManager.getNumOfRow(), gridManager.getNumOfCol());
+    gridManager.setGnrtGrid(gridManager.getSaveGrid());
+
+	return 0;
 }
 
 int GameOfLife::save(string fileName)
 {
-	int check = savePart.saveFile(fileName, gridPart.getGrid(), gridPart.getRow(), gridPart.getColumn());
-    if (check == -22)
-        return -22;
-    else
-        return 0;
+	return fileManager.save(gridManager.getSaveGrid(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-void GameOfLife::clear()
+int GameOfLife::saveAs(string fileName)
 {
-    gridPart.clear();
+    return fileManager.saveAs(fileName, gridManager.getSaveGrid(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-void GameOfLife::resizeGrid(int row, int col)
+void GameOfLife::saveResult(string fileName)
 {
-    gridPart.resizeGrid(row, col);
+    fileManager.saveResult(fileName, gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-void GameOfLife::readFromOut(const vector< vector<bool> > &grid)
+const vector<vector<bool> >& GameOfLife::clear()
 {
-    gridPart.readFromOut(grid);
+    return gridManager.clear();
 }
 
-int GameOfLife::getRow()
+const vector< vector<bool> >& GameOfLife::newGrid()
 {
-    return gridPart.getRow();
+    gridManager.newGrid();
+    fileManager.initName();
+
+    return gridManager.getPattern();
 }
 
-int GameOfLife::getCol()
+void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
 {
-    return gridPart.getColumn();
+    gridManager.resize(row, col);
+}
+
+unsigned int GameOfLife::getNumOfRow()
+{
+    return gridManager.getNumOfRow();
+}
+
+unsigned int GameOfLife::getNumOfCol()
+{
+    return gridManager.getNumOfCol();
 }

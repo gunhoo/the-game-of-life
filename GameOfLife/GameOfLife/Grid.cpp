@@ -1,37 +1,14 @@
 #include "Grid.h"
 
-Grid::Grid(int row, int col)
+Grid::Grid()
 {
-    if(row != 50 && col != 40) {
-        numOfRow = row;
-        numOfColumn = col;
-        gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
-        tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
-    }
-    else {
         numOfRow = 50;
         numOfColumn = 40;
         gridShow.assign(50, vector<bool>(40, false));
         tmpGrid.assign(50, vector<bool>(40, false));
-    }
 }
 
-int Grid::getRow()
-{
-    return numOfRow;
-}
-
-int Grid::getColumn()
-{
-    return numOfColumn;
-}
-
-vector< vector<bool> >& Grid::getGrid()
-{
-	return gridShow;
-}
-
-void Grid::resizeGrid(int row, int col)
+void Grid::resizeGrid(unsigned int row, unsigned int col)
 {
     numOfRow = row;
     numOfColumn = col;
@@ -39,8 +16,7 @@ void Grid::resizeGrid(int row, int col)
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
 }
-
-void Grid::updateGrid()
+const vector< vector<bool> >& Grid::updateGrid()
 {
     // for find the min block we need to check
     unsigned int min_row = numOfRow - 1;
@@ -54,12 +30,14 @@ void Grid::updateGrid()
     while(!currLive.empty()) {
         struct cell tmp(currLive.back());
         currLive.pop_back();
+        getMinBlock(tmp.row, tmp.col, max_row, min_row, max_col, min_col);
+        updateHelper(tmp.row, tmp.col, updateCell);
         for (int r = -1; r < 2; r++) {
             for (int c = -1; c < 2; c++) {
-                if ((tmp.x + r) >= 0 && (tmp.y + c) >= 0 && (tmp.x + r) < numOfRow && (tmp.y + c) < numOfColumn) {
+                if ((tmp.row + r) >= 0 && (tmp.col + c) >= 0 && (tmp.row + r) < numOfRow && (tmp.col + c) < numOfColumn) {
                     if (r != 0 || c != 0) {
-                        if (!gridShow[tmp.x][tmp.y]) {
-                            countGrid[tmp.x + r][tmp.y + c]++;
+                        if (!gridShow[tmp.row + r][tmp.col + c]) {
+                            countGrid[tmp.row + r][tmp.col + c]++;
                         }
                     }
                 }
@@ -69,7 +47,7 @@ void Grid::updateGrid()
 
     for (unsigned int i = min_row; i <= max_row; i++) {
         for (unsigned int j = min_col; j <= max_col; j++) {
-            if (countGrid[i][j] == 3) {
+            if (countGrid[i][j] == 3){
                 tmpGrid[i][j] = true;
                 struct cell livingCell(i, j);
                 updateCell.push_back(livingCell);
@@ -79,9 +57,11 @@ void Grid::updateGrid()
 
     currLive = updateCell;
     gridShow = tmpGrid; 
+
+    return gridShow;
 }
 
-void Grid::readFromOut(const vector< vector<bool> > &grid)
+void Grid::setGnrtGrid(const vector< vector<bool> > &grid)
 {
     gridShow = grid;
 
@@ -95,40 +75,46 @@ void Grid::readFromOut(const vector< vector<bool> > &grid)
     }
 }
 
-void Grid::clear()
+const vector< vector<bool> >& Grid::clear()
 {
     gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
+    return gridShow;
 }
 
-void Grid::updateHelper(int x, int y, list<struct cell> &tmpList)
+const vector< vector<bool> >& Grid::getPattern()
+{
+    return gridShow;
+}
+
+void Grid::updateHelper(unsigned int row, unsigned int col, list<struct cell> &tmpList)
 {
     int count = 0;
     for (int c = -1; c < 2; c++) {
         for (int d = -1; d < 2; d++) {
             if (c != 0 || d != 0) {	// get the number of living neighbors.
-                if (x + c >= 0 && y + d >= 0 && x + c < numOfRow && y + d < numOfColumn && gridShow[x + c][y + d]) {
+                if (row + c >= 0 && col + d >= 0 && row + c < numOfRow && col + d < numOfColumn && gridShow[row + c][col + d]) {
                     count++;
                 }
             }
         }
     }
-    if (gridShow[x][y] && count < 2) {
-        tmpGrid[x][y] = false;
+    if (gridShow[row][col] && count < 2) {
+        tmpGrid[row][col] = false;
     }
-    else if (gridShow[x][y] && (count == 2 || count == 3)) {
-        tmpGrid[x][y] = true;
-        struct cell living(x, y);
+    else if (gridShow[row][col] && (count == 2 || count == 3)) {
+        tmpGrid[row][col] = true;
+        struct cell living(row, col);
         tmpList.push_back(living);
     }
-    else if (!gridShow[x][y] && count == 3) {
-        tmpGrid[x][y] = true;
-        struct cell living(x, y);
+    else if (!gridShow[row][col] && count == 3) {
+        tmpGrid[row][col] = true;
+        struct cell living(row, col);
         tmpList.push_back(living);
     }
-    else if (gridShow[x][y] && count > 3)
-        tmpGrid[x][y] = false;
+    else if (gridShow[row][col] && count > 3)
+        tmpGrid[row][col] = false;
 }
 
 

@@ -7,20 +7,18 @@
 #ifndef GAMEOFLIFE_H
 #define GAMEOFLIFE_H
 
-#include "Grid.h"
-#include "Save.h"
-#include "Load.h"
+#include "GridManager.h"
+#include "FileManager.h"
 #include <string>
 
 using namespace std;
 
 class GameOfLife {
 public:
-    /* get the next generated pattern
-     * then use getGrid() again can fetch the new pattern
-     */
-    void updateGrid();
-	const vector< vector<bool> >& getGrid();
+    
+    const vector< vector<bool> >& run();
+
+    const vector< vector<bool> >& next();
 
     /* return value to check if we open file successful
      * -11 means the file format not match
@@ -34,30 +32,31 @@ public:
      * @parameter: file name
      */
     int save(string fileName);
+    void saveResult(string fileName);
+    int saveAs(string fileName);
 
     /* clear the grid, set all the element to dead.
      * in the grid class, all the gridShow, tmpGrid and currLive are cleared.
      */
-    void clear();
+    const vector< vector<bool> >& clear();
+
+    /* create a new default grid
+     * all the 
+     */
+    const vector< vector<bool> >& newGrid();
 
     /* give the new row and col number to resize the grid
      * all element will be set to false. 
      * @parameter: number of row, number of column
      */ 
-    void resizeGrid(int row, int col);
+    void resizeGrid(unsigned int row, unsigned int col);
 
-    /* read grid from GUI 
-     * @parameter: the 2d vector of grid
-     */
-    void readFromOut(const vector< vector<bool> > &grid);
-
-    int getRow(); // return the number of row
-    int getCol(); // return the number of column
+    unsigned int getNumOfRow(); // return the number of row
+    unsigned int getNumOfCol(); // return the number of column
 
 private:
-    Grid gridPart;
-    Save savePart;
-    Load loadPart;
+    GridManager gridManager;
+    FileManager fileManager;
 };
 
 #endif

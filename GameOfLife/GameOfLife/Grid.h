@@ -3,7 +3,7 @@
  * provide the grid, update cell's state
  * associate with Load and Store class to input or output data file.
  * @creater: ZHU GUANGYU
- * @modify time: 17/11/24 18:57
+ * @modify time: 17/11/25 10:40
  */
 
 #ifndef GRID_H
@@ -53,6 +53,11 @@ public:
     const vector< vector<bool> >& clear();
 
     const vector< vector<bool> >& getPattern();
+
+    /* change cell's status when click on GUI grid
+     * @parameter: clicked cell's coordinations
+     */
+    void changeStatus(unsigned int row, unsigned int col);
 
 private:
     // cell structure for store the living cells into list.

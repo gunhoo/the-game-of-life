@@ -117,7 +117,13 @@ void Grid::updateHelper(unsigned int row, unsigned int col, list<struct cell> &t
         tmpGrid[row][col] = false;
 }
 
-
+void Grid::changeStatus(unsigned int row, unsigned int col)
+{
+    if (gridShow[row][col])
+        gridShow[row][col] = false;
+    else
+        gridShow[row][col] = true;
+}
 
 void Grid::getMinBlock(unsigned int this_row, unsigned int this_col, unsigned int &max_row, unsigned int &min_row, unsigned int &max_col, unsigned int &min_col)
 {

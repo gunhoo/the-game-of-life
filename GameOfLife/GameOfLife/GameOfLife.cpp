@@ -56,6 +56,11 @@ void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
     gridManager.resize(row, col);
 }
 
+void GameOfLife::setByClick(unsigned int row, unsigned int col)
+{
+    gridManager.setByClick(row, col);
+}
+
 unsigned int GameOfLife::getNumOfRow()
 {
     return gridManager.getNumOfRow();

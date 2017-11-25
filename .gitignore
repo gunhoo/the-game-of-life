@@ -144,3 +144,4 @@ CMakeLists.txt.user*
 *.creator.user*
 
 # Qt Creator backups
+GameOfLife/GameOfLife.VC.db

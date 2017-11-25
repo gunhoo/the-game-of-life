@@ -68,17 +68,34 @@
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
+<<<<<<< HEAD
+=======
+    <ClCompile Include="Load.cpp">
+      <Filter>Source Files\Logic</Filter>
+    </ClCompile>
+>>>>>>> gui-gridset
     <ClCompile Include="GeneratedFiles\Debug\moc_initialview.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_initialview.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="GridManager.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
     <ClCompile Include="FileManager.cpp">
       <Filter>Source Files\Logic</Filter>
+=======
+    <ClCompile Include="GeneratedFiles\Debug\moc_gamewidget.cpp">
+      <Filter>Generated Files\Debug</Filter>
+>>>>>>> gui-gridset
+    </ClCompile>
+    <ClCompile Include="initialview.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="gamewidget.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
     <ClCompile Include="initialview.cpp">
       <Filter>Source Files\View</Filter>

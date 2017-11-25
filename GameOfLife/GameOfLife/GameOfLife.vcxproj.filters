@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
@@ -40,6 +40,14 @@
     <Filter Include="Source Files\Logic">
       <UniqueIdentifier>{22c62501-8a91-4b11-862b-e47a8cb1deb0}</UniqueIdentifier>
     </Filter>
+
+    <Filter Include="Header Files\Logic">
+      <UniqueIdentifier>{29d74e04-fdce-445b-ac3f-ae7141f6dfbe}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\View">
+      <UniqueIdentifier>{fe9c5797-9632-44a9-b6e0-15a1a35f80f4}</UniqueIdentifier>
+    </Filter>
+
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -60,75 +68,63 @@
     <ClCompile Include="GameOfLife.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="Save.cpp">
-      <Filter>Source Files\Logic</Filter>
-    </ClCompile>
+
     <ClCompile Include="Grid.cpp">
       <Filter>Source Files\Logic</Filter>
     </ClCompile>
-    <ClCompile Include="Load.cpp">
-      <Filter>Source Files\Logic</Filter>
-    </ClCompile>
-    <ClCompile Include="initialview.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
+
     <ClCompile Include="GeneratedFiles\Debug\moc_initialview.cpp">
       <Filter>Generated Files\Debug</Filter>
     </ClCompile>
     <ClCompile Include="GeneratedFiles\Release\moc_initialview.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
-    <ClCompile Include="gamewidget.cpp">
-      <Filter>Source Files</Filter>
+
+    <ClCompile Include="GridManager.cpp">
+      <Filter>Source Files\Logic</Filter>
     </ClCompile>
+    <ClCompile Include="FileManager.cpp">
+      <Filter>Source Files\Logic</Filter>
+      
     <ClCompile Include="GeneratedFiles\Debug\moc_gamewidget.cpp">
       <Filter>Generated Files\Debug</Filter>
+
     </ClCompile>
-    <ClCompile Include="GeneratedFiles\Release\moc_gamewidget.cpp">
-      <Filter>Generated Files\Release</Filter>
+    <ClCompile Include="initialview.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="gamewidget.cpp">
+      <Filter>Source Files\View</Filter>
+    </ClCompile>
+    <ClCompile Include="initialview.cpp">
+      <Filter>Source Files\View</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="gameoflifeview.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
+
     <CustomBuild Include="gameoflifeview.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
     <CustomBuild Include="gameoflifeview.qrc">
       <Filter>Resource Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="initialview.h">
-      <Filter>Header Files</Filter>
-    </CustomBuild>
+
     <CustomBuild Include="initialview.ui">
       <Filter>Form Files</Filter>
     </CustomBuild>
-    <CustomBuild Include="gamewidget.h">
-      <Filter>Header Files</Filter>
+    <CustomBuild Include="gameoflifeview.h">
+      <Filter>Header Files\View</Filter>
+    </CustomBuild>
+    <CustomBuild Include="initialview.h">
+      <Filter>Header Files\View</Filter>
+
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GeneratedFiles\ui_gameoflifeview.h">
       <Filter>Generated Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameOfLife.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Save.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Grid.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Load.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="GeneratedFiles\ui_initialview.h">
-      <Filter>Generated Files</Filter>
-    </ClInclude>
-  </ItemGroup>
-=======
+
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
@@ -252,5 +248,21 @@
       <Filter>Header Files\Logic</Filter>
     </ClInclude>
   </ItemGroup>
->>>>>>> a939e47fdc6207439b6ad23878bed67e40111b4a
+
+    <ClInclude Include="GeneratedFiles\ui_initialview.h">
+      <Filter>Generated Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FileManager.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="GameOfLife.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="Grid.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+    <ClInclude Include="GridManager.h">
+      <Filter>Header Files\Logic</Filter>
+    </ClInclude>
+  </ItemGroup>
 </Project>

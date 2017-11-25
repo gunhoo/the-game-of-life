@@ -13,6 +13,9 @@ public:
 	explicit GameWidget(QWidget *parent = 0);
 	~GameWidget();
 
+	void GameWidget::setUniverseWithGrid(vector< vector<bool> > grid);
+
+
 protected:
 	void paintEvent(QPaintEvent *);
 	void mousePressEvent(QMouseEvent *e);
@@ -36,7 +39,9 @@ private:
 	bool* universe; // map
 	int universeSizeX;
 	int universeSizeY;
-	void resetUniverse();// reset the size of universe
+
+	void resetUniverse(); // reset the size of universe
+
 };
 
 #endif // GAMEWIDGET_H

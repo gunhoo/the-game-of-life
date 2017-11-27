@@ -68,6 +68,7 @@ const vector< vector<bool> >& Grid::updateGrid()
                 struct cell livingCell(i, j);
                 updateCell.push_back(livingCell);
             }
+            else
         }
     }
 
@@ -135,10 +136,12 @@ void Grid::changeStatus(unsigned int row, unsigned int col)
 {
     if (gridShow[row][col]) {
         gridShow[row][col] = false;
+        tmpGrid[row][col] = false;
         deleteFromList(row, col);
     }
     else {
         gridShow[row][col] = true;
+        tmpGrid[row][col] = false;
         struct cell newCell(row, col);
         currLive.push_back(newCell);
     }

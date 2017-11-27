@@ -65,8 +65,12 @@ void GameOfLifeView::initialize()
 		// true : open file, false : new file
 		if (initialView->initialViewFinished(fileName))
 		{
-			this->loadFile(fileName);
-			game->setUniverseWithGrid(controller->getPattern());
+			if (this->loadFile(fileName) != -11) {
+				game->setUniverseWithGrid(controller->getPattern());
+			}
+			else {
+				this->newButtonClicked();
+			}
 		}
 		else {
 			controller->newFile();
@@ -94,8 +98,13 @@ void GameOfLifeView::openButtonClicked()
 		warningBox.exec();
 	}
 	else {
-		this->loadFile(fileName);
-		game->setUniverseWithGrid(controller->getPattern());
+		if (this->loadFile(fileName) != -11) {
+			game->setUniverseWithGrid(controller->getPattern());
+		}
+		else {
+			this->newButtonClicked();
+		}
+		
 	}
 }
 
@@ -129,7 +138,7 @@ void GameOfLifeView::quitButtonClicked()
 void GameOfLifeView::runButtonClicked()
 {
 	if (!timer->isActive()) {
-		timer->start(500);
+		timer->start(100);
 	}	
 }
 
@@ -160,19 +169,22 @@ void GameOfLifeView::resizeButtonClicked()
 void GameOfLifeView::clearButtonClicked()
 {
 	this->controller->clear();
-	game->clear();
+	this->game->clear();
 }
 
-void GameOfLifeView::loadFile(QString fileName)
+int GameOfLifeView::loadFile(QString fileName)
 {
-	
-	if (controller->loadFile(fileName.toStdString()) == -11) {
-		QMessageBox warningBox;
+	QMessageBox warningBox;
+
+	int errorCode = controller->loadFile(fileName.toStdString());
+	if (errorCode == -11) {
+
+		this->controller->clear();
+		this->game->clear();
+		
 		warningBox.setText("Load Error!");
 		warningBox.setStandardButtons(QMessageBox::Ok);
 		warningBox.setDefaultButton(QMessageBox::Ok);
-
-		warningBox.exec();
 	}
 	else
 	{
@@ -180,9 +192,10 @@ void GameOfLifeView::loadFile(QString fileName)
 		warningBox.setText("Load Success!");
 		warningBox.setStandardButtons(QMessageBox::Ok);
 		warningBox.setDefaultButton(QMessageBox::Ok);
-
-		warningBox.exec();
 	}
+
+	warningBox.exec();
+	return errorCode;
 }
 
 void GameOfLifeView::saveFileWithFileDialog()

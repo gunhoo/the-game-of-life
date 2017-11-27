@@ -66,21 +66,24 @@ void GameOfLifeView::initialize()
 		if (initialView->initialViewFinished(fileName))
 		{
 			if (this->loadFile(fileName) != -11) {
-				game->setUniverseWithGrid(controller->getPattern());
+				grid = controller->getPattern();
+				ui->rowSpinBox->setValue(grid.size());
+				ui->colSpinBox->setValue(grid[0].size());
+				game->setUniverseWithGrid(grid);
 			}
 			else {
 				this->newButtonClicked();
 			}
 		}
 		else {
-			controller->newFile();
+			this->newFile();
 		}
 	}
 }
 
 void GameOfLifeView::newButtonClicked()
 {
-	controller->newFile();
+	this->newFile();
 }
 
 void GameOfLifeView::openButtonClicked()
@@ -99,12 +102,14 @@ void GameOfLifeView::openButtonClicked()
 	}
 	else {
 		if (this->loadFile(fileName) != -11) {
-			game->setUniverseWithGrid(controller->getPattern());
+			grid = controller->getPattern();
+			ui->rowSpinBox->setValue(grid.size());
+			ui->colSpinBox->setValue(grid[0].size());
+			game->setUniverseWithGrid(grid);
 		}
 		else {
-			this->newButtonClicked();
+			this->newFile();
 		}
-		
 	}
 }
 
@@ -137,8 +142,23 @@ void GameOfLifeView::quitButtonClicked()
 
 void GameOfLifeView::runButtonClicked()
 {
+	ui->stopButton->setEnabled(true);
+	ui->runButton->setEnabled(false);
+	ui->nextButton->setEnabled(false);
+	ui->clearButton->setEnabled(false);
+	ui->resizeButton->setEnabled(false);
+
+	ui->rowSpinBox->setEnabled(false);
+	ui->colSpinBox->setEnabled(false);
+
+	ui->actionNew->setEnabled(false);
+	ui->actionOpen->setEnabled(false);
+	ui->actionSave->setEnabled(false);
+	ui->actionSave_As->setEnabled(false);
+	ui->actionSave_Result->setEnabled(false);
+
 	if (!timer->isActive()) {
-		timer->start(100);
+		timer->start(150);
 	}	
 }
 
@@ -147,6 +167,21 @@ void GameOfLifeView::stopButtonClicked()
 	if (timer->isActive()) {
 		timer->stop();
 	}
+
+	ui->stopButton->setEnabled(false);
+	ui->runButton->setEnabled(true);
+	ui->nextButton->setEnabled(true);
+	ui->clearButton->setEnabled(true);
+	ui->resizeButton->setEnabled(true);
+
+	ui->rowSpinBox->setEnabled(true);
+	ui->colSpinBox->setEnabled(true);
+
+	ui->actionNew->setEnabled(true);
+	ui->actionOpen->setEnabled(true);
+	ui->actionSave->setEnabled(true);
+	ui->actionSave_As->setEnabled(true);
+	ui->actionSave_Result->setEnabled(true);
 }
 
 void GameOfLifeView::nextButtonClicked()
@@ -168,27 +203,34 @@ void GameOfLifeView::resizeButtonClicked()
 
 void GameOfLifeView::clearButtonClicked()
 {
-	this->controller->clear();
-	this->game->clear();
+	this->clear();
+}
+
+void GameOfLifeView::newFile()
+{
+	this->controller->newFile();
+	this->universeRow = 50;
+	this->universeCol = 40;
+	this->ui->rowSpinBox->setValue(this->universeRow);
+	this->ui->colSpinBox->setValue(this->universeCol);
+	game->setCellSize(this->universeRow, this->universeCol);
+	this->clear();
 }
 
 int GameOfLifeView::loadFile(QString fileName)
 {
 	QMessageBox warningBox;
 
+	this->clear();
+
 	int errorCode = controller->loadFile(fileName.toStdString());
 	if (errorCode == -11) {
-
-		this->controller->clear();
-		this->game->clear();
-		
 		warningBox.setText("Load Error!");
 		warningBox.setStandardButtons(QMessageBox::Ok);
 		warningBox.setDefaultButton(QMessageBox::Ok);
 	}
 	else
 	{
-		QMessageBox warningBox;
 		warningBox.setText("Load Success!");
 		warningBox.setStandardButtons(QMessageBox::Ok);
 		warningBox.setDefaultButton(QMessageBox::Ok);
@@ -196,6 +238,12 @@ int GameOfLifeView::loadFile(QString fileName)
 
 	warningBox.exec();
 	return errorCode;
+}
+
+void GameOfLifeView::clear()
+{
+	this->controller->clear();
+	this->game->clear();
 }
 
 void GameOfLifeView::saveFileWithFileDialog()

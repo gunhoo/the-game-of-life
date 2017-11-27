@@ -41,8 +41,10 @@ private slots:
 	void getNextGeneration();
 
 private:
+	void GameOfLifeView::newFile();
 	int loadFile(QString fileName);
 	void saveFileWithFileDialog();
+	void clear();
 	Ui::GameOfLifeViewClass *ui;
 	InitialView *initialView;
 	GameOfLife *controller;

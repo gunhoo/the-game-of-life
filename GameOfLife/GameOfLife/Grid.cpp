@@ -10,11 +10,21 @@ Grid::Grid()
 
 void Grid::resizeGrid(unsigned int row, unsigned int col)
 {
-    numOfRow = row;
-    numOfColumn = col;
-    gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
-    tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
-    currLive.clear();
+    if (row > numOfRow && col > numOfColumn) {
+        vector< vector<bool> > newShow(row, vector<bool>(col, false));
+        for (int i = 0; i < numOfRow; i++) {
+            for (int j = 0; j < numOfColumn; j++) {
+                newShow[i][j] = gridShow[i][j];
+            }
+        }
+        gridShow = newShow;
+        tmpGrid = newShow;
+        numOfRow = row;
+        numOfColumn = col;
+    }
+    //gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
+    //tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
+    //currLive.clear();
 }
 
 void Grid::setTmpSize(unsigned int row, unsigned int col)

@@ -45,7 +45,7 @@ void GameWidget::setUniverseWithGrid(const vector< vector<bool> >& grid) {
 	
 		for (int i = 0; i < universeSizeRow; i++) {
 			for (int j = 0; j < universeSizeCol; j++) {
-				universe[(j + 1) * universeSizeCol + (i + 1)] =
+				universe[(i + 1) * universeSizeCol + (j + 1)] =
 					grid[i][j];
 			}
 		}

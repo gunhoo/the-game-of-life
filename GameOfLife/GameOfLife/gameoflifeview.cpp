@@ -16,6 +16,8 @@ GameOfLifeView::GameOfLifeView(QWidget *parent)
 
 	game->setParentView(this);
 
+	this->timer = new QTimer(this);
+
 	connect(ui->actionNew, SIGNAL(triggered()), this, SLOT(newButtonClicked()));
 	connect(ui->actionOpen, SIGNAL(triggered()), this, SLOT(openButtonClicked()));
 	connect(ui->actionSave, SIGNAL(triggered()), this, SLOT(saveButtonClicked()));
@@ -32,6 +34,8 @@ GameOfLifeView::GameOfLifeView(QWidget *parent)
 	
 	connect(ui->resizeButton, SIGNAL(clicked()), this, SLOT(resizeButtonClicked()));
 	connect(ui->clearButton, SIGNAL(clicked()), this, SLOT(clearButtonClicked()));
+
+	connect(this->timer, SIGNAL(timeout()), this, SLOT(getNextGeneration()));
 
 	ui->gameLayout->addWidget(game);
 	
@@ -124,14 +128,16 @@ void GameOfLifeView::quitButtonClicked()
 
 void GameOfLifeView::runButtonClicked()
 {
-	this->isStop = false;
-	std::thread th(&GameOfLifeView::runGeneration, this);
-
+	if (!timer->isActive()) {
+		timer->start(500);
+	}	
 }
 
 void GameOfLifeView::stopButtonClicked()
 {
-	this->isStop = true;
+	if (timer->isActive()) {
+		timer->stop();
+	}
 }
 
 void GameOfLifeView::nextButtonClicked()
@@ -187,20 +193,6 @@ void GameOfLifeView::saveFileWithFileDialog()
 
 	controller->saveAsFile(fileName.toStdString());
 }
-
-
-void GameOfLifeView::runGeneration()
-{
-	while (!this->isStop) 
-	{
-		this->getNextGeneration();
-
-		clock_t endwait;
-		endwait = clock() + 0.5 * CLOCKS_PER_SEC;
-		while (clock() < endwait) {}
-	}
-}
-
 
 void GameOfLifeView::getNextGeneration()
 {

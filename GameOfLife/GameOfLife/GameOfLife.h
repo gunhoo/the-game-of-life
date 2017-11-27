@@ -17,23 +17,31 @@ class GameOfLife {
 public:
     
     const vector< vector<bool> >& run();
-
+    
+    /* update the pattern, get the reference to pattern grid
+     * if this is the 1st time run, pass pattern to initGrid
+     */
     const vector< vector<bool> >& next();
+
+    /* create a new file with default size 50 * 40
+     * clear the notFstRun, fileName(in fileManager)
+     */
+	const vector< vector<bool> >& newFile();
 
     /* return value to check if we open file successful
      * -11 means the file format not match
-     * @parameter: file name
+     * @parameter: file name or file path
      */
-    int load(string fileName);
+    int loadFile(string fileName);
 
     /* save the pattern into a file.
      * return value to check if save file successful
      * -22 means there is already a file with same file name;
      * @parameter: file name
      */
-    int save(string fileName);
-    void saveResult(string fileName);
-    int saveAs(string fileName);
+    int saveFile();
+    void saveResultFile(string fileName);
+    int saveAsFile(string fileName);
 
     /* clear the grid, set all the element to dead.
      * in the grid class, all the gridShow, tmpGrid and currLive are cleared.
@@ -57,12 +65,16 @@ public:
      * */
     void setByClick(unsigned int row, unsigned int col);
 
+    const vector< vector<bool> >& getPattern();
+
     unsigned int getNumOfRow(); // return the number of row
     unsigned int getNumOfCol(); // return the number of column
 
 private:
     GridManager gridManager;
     FileManager fileManager;
+
+    bool notFstRun;
 };
 
 #endif

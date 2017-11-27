@@ -6,36 +6,48 @@ GridManager::GridManager()
         numOfCol = 40;
         initGrid.assign(50, vector<bool>(40, false));
 }
-
+/*
 vector< vector<bool> >& GridManager::setInitGrid()
 {
     return initGrid;
 }
-
-unsigned int& GridManager::setRow()
+*/
+void GridManager::setInitGrid(const vector< vector<bool> >& pattern, unsigned int row, unsigned int col)
 {
-    return numOfRow;
+    numOfRow = row;
+    numOfCol = col;
+    initGrid = pattern;
 }
 
-unsigned int& GridManager::setCol()
+unsigned int& GridManager::rowRef()
 {
-    return numOfCol;
+    return gridUpdate.rowRef();
 }
 
+unsigned int& GridManager::colRef()
+{
+    return gridUpdate.colRef();
+}
+
+vector< vector<bool> >& GridManager::gridRef()
+{
+    return gridUpdate.gridRef();
+}
 
 const vector< vector<bool> >& GridManager::getSaveGrid()
 {
     return initGrid;
 }
 
+
 unsigned int GridManager::getNumOfRow()
 {
-    return numOfRow;
+    return gridUpdate.getNumOfRow();
 }
 
 unsigned int GridManager::getNumOfCol()
 {
-    return numOfCol;
+    return gridUpdate.getNumOfCol();
 }
 
 void GridManager::resize(unsigned int row, unsigned int col)
@@ -43,14 +55,19 @@ void GridManager::resize(unsigned int row, unsigned int col)
     gridUpdate.resizeGrid(row, col);   
 }
 
+void GridManager::setTmpSize(unsigned int row, unsigned int col)
+{
+    gridUpdate.setTmpSize(row, col);
+}
+
 const vector< vector<bool> >& GridManager::clear()
 {
     return gridUpdate.clear();
 }
 
-void GridManager::setGnrtGrid(const vector< vector<bool> >& grid)
+void GridManager::updateLivingList()
 {
-    gridUpdate.setGnrtGrid(grid);
+    gridUpdate.updateCurrLive();
 }
 
 void GridManager::newGrid()
@@ -71,12 +88,7 @@ const vector< vector<bool> >& GridManager::getPattern()
     return gridUpdate.getPattern();
 }
 
-void GridManager::setByClick(unsigned int row, unsigned  int col, vector< vector<bool> >& grid)
+void GridManager::setByClick(unsigned int row, unsigned  int col)
 {
-    if (grid[row][col])
-        grid[row][col] = false;
-    else
-        gir[row][col] = true;
-    
     gridUpdate.changeStatus(row, col);
 }

@@ -16,6 +16,12 @@ void Grid::resizeGrid(unsigned int row, unsigned int col)
     tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
     currLive.clear();
 }
+
+void Grid::setTmpSize(unsigned int row, unsigned int col)
+{
+    tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
+}
+
 const vector< vector<bool> >& Grid::updateGrid()
 {
     // for find the min block we need to check
@@ -61,13 +67,11 @@ const vector< vector<bool> >& Grid::updateGrid()
     return gridShow;
 }
 
-void Grid::setGnrtGrid(const vector< vector<bool> > &grid)
+void Grid::updateCurrLive()
 {
-    gridShow = grid;
-
     for (int i = 0; i < numOfRow; i++) {
         for (int j = 0; j < numOfColumn; j++) {
-            if (grid[i][j]) {
+            if (gridShow[i][j]) {
                 struct cell livingCell(i, j);
                 currLive.push_back(livingCell);                
             }
@@ -119,10 +123,40 @@ void Grid::updateHelper(unsigned int row, unsigned int col, list<struct cell> &t
 
 void Grid::changeStatus(unsigned int row, unsigned int col)
 {
-    if (gridShow[row][col])
+    if (gridShow[row][col]) {
         gridShow[row][col] = false;
-    else
+        deleteFromList(row, col);
+    }
+    else {
         gridShow[row][col] = true;
+        struct cell newCell(row, col);
+        currLive.push_back(newCell);
+    }
+}
+
+vector< vector<bool> >& Grid::gridRef()
+{
+    return gridShow;
+}
+
+unsigned int& Grid::rowRef()
+{
+    return numOfRow;
+}
+
+unsigned int& Grid::colRef()
+{
+    return numOfColumn;
+}
+
+unsigned int Grid::getNumOfRow()
+{
+    return numOfRow;
+}
+
+unsigned int Grid::getNumOfCol()
+{
+    return numOfColumn; 
 }
 
 void Grid::getMinBlock(unsigned int this_row, unsigned int this_col, unsigned int &max_row, unsigned int &min_row, unsigned int &max_col, unsigned int &min_col)
@@ -155,4 +189,16 @@ void Grid::getMinBlock(unsigned int this_row, unsigned int this_col, unsigned in
 			max_col = this_col + 1;
 	}
 }
+
+void Grid::deleteFromList(unsigned int row, unsigned int col)
+{
+    list<cell>::iterator it;
+    for (it = currLive.begin(); it != currLive.end(); it++)
+    {
+        if (it->row == row && it->col == col)
+            break;
+    }
+    currLive.erase(it);
+}
+
 

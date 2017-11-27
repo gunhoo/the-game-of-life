@@ -18,14 +18,12 @@ public:
      * build a default grid which size is 50 * 40
      */
     GridManager();
-
-    /* pass grid's referenec
-     * let load to modify the initGrid
-     */
-    vector< vector<bool> >& setInitGrid();
     
-    unsigned int& setRow();
-    unsigned int& setCol();
+    void setInitGrid(const vector< vector<bool> >& pattern, unsigned int row, unsigned int col);
+
+    unsigned int& rowRef();
+    unsigned int& colRef();
+    vector< vector<bool> >& gridRef();
 
     const vector< vector<bool> >& getSaveGrid();
     
@@ -33,7 +31,15 @@ public:
     
     unsigned int getNumOfCol();
 
+    /* resie the whole grid
+     * set all the cells to dead
+     */
     void resize(unsigned int row, unsigned int col);
+
+    /* set Grid's tmpGrid to the new size
+     * do this when load
+     */
+    void setTmpSize(unsigned int row, unsigned int col);
 
     /* clear current grid
      * set all the cells to be dead
@@ -45,14 +51,13 @@ public:
      */
     void newGrid();
 
-    void setGnrtGrid(const vector< vector<bool> >& grid);
+    void updateLivingList();
 
     const vector< vector<bool> >& generateGrid();
 
     const vector< vector<bool> >& getPattern();
 
-    void setByClick(unsigned int row, unsigned  int col, vector< vector<bool> >& grid);
-
+    void setByClick(unsigned int row, unsigned  int col);
 
 private:
     vector< vector<bool> > initGrid;

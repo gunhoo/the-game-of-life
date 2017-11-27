@@ -35,17 +35,21 @@ public:
      */
     void resizeGrid(unsigned int row, unsigned int col);
 
+    /* set the tmp grid's size
+     * do this when load file
+     */
+    void setTmpSize(unsigned int row, unsigned int col);
+
     /* check living cell and its 8 neighbors
      * depends on the number of living neighbors, set cell's state.
      * then update the pattern
      */
 	const vector< vector<bool> >& updateGrid();
 
-    /* read a new grid from out
-     * update the currLive list at same time.
+     /* update the currLive list at same time.
      * @parameter: 2d vector from GridManager's initGrid
      */
-    void setGnrtGrid(const vector< vector<bool> > &grid); // change cell's state
+    void updateCurrLive();
 
     /* set all the element's to dead, clear the living cell list
      * does not change the #row and #col
@@ -55,9 +59,23 @@ public:
     const vector< vector<bool> >& getPattern();
 
     /* change cell's status when click on GUI grid
+     * if changed to Live, add it in the currLive list
+     * if changed to Dead, delete it from the currLive List
      * @parameter: clicked cell's coordinations
      */
     void changeStatus(unsigned int row, unsigned int col);
+
+//  return the reference for load file.
+    vector< vector<bool> >& gridRef();
+
+    unsigned int& rowRef();
+
+    unsigned int& colRef();
+
+    unsigned int getNumOfRow();
+
+    unsigned int getNumOfCol();
+    
 
 private:
     // cell structure for store the living cells into list.
@@ -81,9 +99,13 @@ private:
     };
 
     unsigned int numOfRow;
+
     unsigned int numOfColumn;
+
     vector< vector<bool> > gridShow;
+
     vector< vector<bool> > tmpGrid; // a temperary grid for helping generate next pattern
+
     list<struct cell> currLive; // a list for store all the living cells
 
     void updateHelper(unsigned int row, unsigned int col, list<struct cell> &tmpList); // function which check the living cells around a cell
@@ -93,7 +115,7 @@ private:
      * @parameter: living cell's row and col, current time's max/min row and min.
      */
     void getMinBlock(unsigned int this_row, unsigned int this_col, unsigned int& max_row, unsigned int& min_row, unsigned int& max_col, unsigned int& min_col);
-    
+    void deleteFromList(unsigned int row, unsigned int col);
 };
 
 #endif

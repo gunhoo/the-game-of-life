@@ -66,22 +66,14 @@ int FileManager::load(string fileName, vector< vector <bool> >& input, unsigned 
 
 void FileManager::initName()
 {
-	FileName = "untitle.txt";
+	FileName.clear(); 
 }
 
 int FileManager::save(const vector< vector <bool> >& grid, unsigned int row, unsigned int col) {
 
 	//if user click new after click save CUI must give new filename value 
-	if (FileName == "untitle.txt" && Modify == true) {
-		string newfile;
-		saveAs(newfile, grid, row, col);
+	if (FileName.empty()) 
 		return -1;
-	}
-
-	if (Modify == false) {
-		//file does not change at all
-		return 0;
-	}
 
 	ofstream myfile;
 	myfile.open(FileName);
@@ -104,17 +96,15 @@ int FileManager::save(const vector< vector <bool> >& grid, unsigned int row, uns
 		myfile << "\n";
 	}
 	myfile.close();
-	return 0; //success
+	return 0; 
+}
+
+bool FileManager::isNewFile()
+{
+	return FileName.empty();
 }
 
 int FileManager::saveAs(string fileName, const vector< vector <bool> >& grid, unsigned int row, unsigned int col) {
-
-	//don't need to implement modify exception user can want save same data in different text file.
-
-	if (FileName == fileName) {
-		// user wants to save the new file to old file we'd better ask about  user want overwriting or not.
-		return -1;
-	}
 
 	ofstream myfile;
 	myfile.open(fileName);
@@ -137,7 +127,7 @@ int FileManager::saveAs(string fileName, const vector< vector <bool> >& grid, un
 		myfile << "\n";
 	}
 	myfile.close();
-	return 0; //success
+	return 0; 
 }
 
 void FileManager::saveResult(string fileName, const vector< vector <bool> >& pattern, unsigned int row, unsigned int col) {
@@ -163,8 +153,4 @@ void FileManager::saveResult(string fileName, const vector< vector <bool> >& pat
 		myfile << "\n";
 	}
 	myfile.close();
-}
-
-void FileManager::isModify() {
-	Modify = true;
 }

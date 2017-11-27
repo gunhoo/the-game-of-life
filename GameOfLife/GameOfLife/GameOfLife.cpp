@@ -8,32 +8,45 @@ const vector< vector<bool> >& GameOfLife::run()
 
 const vector< vector<bool> >& GameOfLife::next()
 {
+    
+    if (!notFstRun)
+        gridManager.setInitGrid(gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
     return gridManager.generateGrid();
+
 }
 
-int GameOfLife::load(string fileName)
+const vector< vector<bool> >& GameOfLife::newFile()
 {
-    int check = fileManager.load(fileName, gridManager.setInitGrid(), gridManager.setRow(), gridManager.setCol()); 
+	gridManager.newGrid();
+    fileManager.initName();
+
+    notFstRun = false;
+
+    return gridManager.getPattern();
+}
+
+int GameOfLife::loadFile(string fileName)
+{
+    int check = fileManager.load(fileName, gridManager.gridRef(), gridManager.rowRef(), gridManager.colRef()); 
     if (check == -11)
         return -11;
 
-    gridManager.resize(gridManager.getNumOfRow(), gridManager.getNumOfCol());
-    gridManager.setGnrtGrid(gridManager.getSaveGrid());
-
+    gridManager.setTmpSize(gridManager.getNumOfRow(), gridManager.getNumOfCol());
+    gridManager.updateLivingList();
 	return 0;
 }
 
-int GameOfLife::save(string fileName)
+int GameOfLife::saveFile()
 {
 	return fileManager.save(gridManager.getSaveGrid(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-int GameOfLife::saveAs(string fileName)
+int GameOfLife::saveAsFile(string fileName)
 {
     return fileManager.saveAs(fileName, gridManager.getSaveGrid(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
-void GameOfLife::saveResult(string fileName)
+void GameOfLife::saveResultFile(string fileName)
 {
     fileManager.saveResult(fileName, gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
@@ -41,14 +54,6 @@ void GameOfLife::saveResult(string fileName)
 const vector<vector<bool> >& GameOfLife::clear()
 {
     return gridManager.clear();
-}
-
-const vector< vector<bool> >& GameOfLife::newGrid()
-{
-    gridManager.newGrid();
-    fileManager.initName();
-
-    return gridManager.getPattern();
 }
 
 void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
@@ -60,6 +65,12 @@ void GameOfLife::setByClick(unsigned int row, unsigned int col)
 {
     gridManager.setByClick(row, col);
 }
+
+const vector< vector<bool> >& GameOfLife::getPattern()
+{
+    return gridManager.getPattern();
+}
+
 
 unsigned int GameOfLife::getNumOfRow()
 {

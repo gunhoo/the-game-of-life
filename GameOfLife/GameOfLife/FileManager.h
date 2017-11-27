@@ -1,3 +1,7 @@
+/* controd load and save
+ * modify time: 17/11/25 17:30
+ */
+
 #ifndef FILEMANAGER_H
 #define FILEMANAGER_H
 
@@ -14,10 +18,9 @@ public:
 
 
 
-	/*
-	save success reuturn 0 (modify == false is also return 0 because don't need to save file)
-	In save as function if filename is already exsist return -1;
-	*/
+	/* get file from outside, store the cell status in a 2d vector
+	 * @paramater: the reference to the grid we want to load in. (here is the the Grid's gridShow)
+	 */
 	int load(string fileName, vector< vector <bool> >& input, unsigned int& row, unsigned int& col);
 
 	/*
@@ -31,12 +34,10 @@ public:
 
 	void initName();
 
-	void isModify();
+	bool isNewFile();
 
 private:
 	string FileName;
-	//modify false = not chage		modify true = changed
-	bool Modify = false;
 
 };
 

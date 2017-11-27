@@ -5,6 +5,9 @@
 #include <QWidget>
 #include "initialview.h"
 #include "GameOfLife.h"
+#include "gameoflifeview.h"
+
+class GameOfLifeView;
 
 class GameWidget : public QWidget
 {
@@ -12,22 +15,24 @@ class GameWidget : public QWidget
 public:
 	explicit GameWidget(QWidget *parent = 0);
 	~GameWidget();
-
-	void GameWidget::setUniverseWithGrid(vector< vector<bool> > grid);
-
+	void GameWidget::setUniverseWithGrid(const vector< vector<bool> >& grid);
+	void setCellSize(const int &row, const int &col);
+	void setParentView(GameOfLifeView* parentView);
+	double getCellHeight();
+	double getCellWidth();
 
 protected:
 	void paintEvent(QPaintEvent *);
 	void mousePressEvent(QMouseEvent *e);
-	//void mouseMoveEvent(QMouseEvent *e);
 
 signals:
 	//when one of the cell has been changed,emit this signal to lock the universeSize
 	void environmentChanged(bool ok);
 	//when game is over or clear is called,emit it to unlock the universeSize
+	void gameEnds(bool ok);
 
-
-public slots:
+	public slots:
+	void setCellNumber();
 	void clear(); // clear
 
 private slots:
@@ -37,11 +42,11 @@ private slots:
 private:
 	QColor m_masterColor;
 	bool* universe; // map
-	int universeSizeX;
-	int universeSizeY;
-
-	void resetUniverse(); // reset the size of universe
-
+	bool* next;
+	int universeSizeRow;
+	int universeSizeCol;
+	void resetUniverse();// reset the size of universe
+	GameOfLifeView* _parentView;
 };
 
 #endif // GAMEWIDGET_H

@@ -7,6 +7,7 @@
 #include "GameOfLife.h"
 #include "gamewidget.h"
 #include <QMouseEvent>
+#include <QTimer>
 
 class GameWidget;
 
@@ -37,18 +38,19 @@ private slots:
 	void clearButtonClicked();
 	void setCellNumberRow(int row);
 	void setCellNumberCol(int col);
-	
+	void getNextGeneration();
 
 private:
-	void loadFile(QString fileName);
+	void GameOfLifeView::newFile();
+	int loadFile(QString fileName);
 	void saveFileWithFileDialog();
-	void runGeneration();
-	void getNextGeneration();
+	void clear();
 	Ui::GameOfLifeViewClass *ui;
 	InitialView *initialView;
 	GameOfLife *controller;
 	GameWidget *game;
 	vector< vector<bool> > grid;
+	QTimer* timer;
 	bool isStop;
 };
 

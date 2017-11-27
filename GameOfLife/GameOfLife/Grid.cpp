@@ -22,9 +22,6 @@ void Grid::resizeGrid(unsigned int row, unsigned int col)
         numOfRow = row;
         numOfColumn = col;
     }
-    //gridShow.assign(numOfRow, vector<bool>(numOfColumn, false));
-    //tmpGrid.assign(numOfRow, vector<bool>(numOfColumn, false));
-    //currLive.clear();
 }
 
 void Grid::setTmpSize(unsigned int row, unsigned int col)
@@ -68,7 +65,6 @@ const vector< vector<bool> >& Grid::updateGrid()
                 struct cell livingCell(i, j);
                 updateCell.push_back(livingCell);
             }
-            else
         }
     }
 
@@ -141,7 +137,7 @@ void Grid::changeStatus(unsigned int row, unsigned int col)
     }
     else {
         gridShow[row][col] = true;
-        tmpGrid[row][col] = false;
+        tmpGrid[row][col] = true;
         struct cell newCell(row, col);
         currLive.push_back(newCell);
     }

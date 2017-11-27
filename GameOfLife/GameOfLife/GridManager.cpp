@@ -6,12 +6,7 @@ GridManager::GridManager()
         numOfCol = 40;
         initGrid.assign(50, vector<bool>(40, false));
 }
-/*
-vector< vector<bool> >& GridManager::setInitGrid()
-{
-    return initGrid;
-}
-*/
+
 void GridManager::setInitGrid(const vector< vector<bool> >& pattern, unsigned int row, unsigned int col)
 {
     numOfRow = row;

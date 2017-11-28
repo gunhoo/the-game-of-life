@@ -197,6 +197,9 @@ void GameOfLifeView::nextButtonClicked()
 
 void GameOfLifeView::resizeButtonClicked()
 {
+
+	this->controller->clear();
+
 	controller->resizeGrid(
 		this->universeRow, 
 		this->universeCol);

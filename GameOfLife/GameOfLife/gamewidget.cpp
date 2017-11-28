@@ -40,11 +40,10 @@ void GameWidget::setUniverseWithGrid(const vector< vector<bool> >& grid) {
 			this->universeSizeRow = row;
 			this->setCellNumber();
 		}
-	
-		for (int i = 0; i < universeSizeRow; i++) {
-			for (int j = 0; j < universeSizeCol; j++) {
-				universe[(i + 1) * universeSizeCol + (j + 1)] =
-					grid[i][j];
+
+		for (int i = 1; i <= universeSizeRow; i++) {
+			for (int j = 1; j <= universeSizeCol; j++) {
+				universe[i*universeSizeCol + j] = grid[i-1][j-1];
 			}
 		}
 
@@ -54,11 +53,12 @@ void GameWidget::setUniverseWithGrid(const vector< vector<bool> >& grid) {
 
 void GameWidget::clear()
 {
-	for (int k = 1; k <= universeSizeCol; k++) {
-		for (int j = 1; j <= universeSizeRow; j++) {
-			universe[k*universeSizeCol + j] = false;
+	for (int i = 1; i <= universeSizeRow; i++) {
+		for (int j = 1; j <= universeSizeCol; j++) {
+			universe[i*universeSizeCol + j] = false;
 		}
 	}
+
 	gameEnds(true);
 	update();
 }

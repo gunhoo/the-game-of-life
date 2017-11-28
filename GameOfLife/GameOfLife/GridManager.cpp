@@ -55,9 +55,9 @@ void GridManager::setTmpSize(unsigned int row, unsigned int col)
     gridUpdate.setTmpSize(row, col);
 }
 
-const vector< vector<bool> >& GridManager::clear()
+void GridManager::clear()
 {
-    return gridUpdate.clear();
+	this->setInitGrid(gridUpdate.clear(), gridUpdate.getNumOfRow(), gridUpdate.getNumOfCol());
 }
 
 void GridManager::updateLivingList()

@@ -16,7 +16,8 @@ using namespace std;
 class GameOfLife {
 public:
     
-    const vector< vector<bool> >& run();
+    void run();
+	void stop();
     
     /* update the pattern, get the reference to pattern grid
      * if this is the 1st time run, pass pattern to initGrid
@@ -46,7 +47,7 @@ public:
     /* clear the grid, set all the element to dead.
      * in the grid class, all the gridShow, tmpGrid and currLive are cleared.
      */
-    const vector< vector<bool> >& clear();
+    void clear();
 
     /* give the new row and col number to resize the grid
      * all element will be set to false. 
@@ -69,7 +70,7 @@ private:
     GridManager gridManager;
     FileManager fileManager;
 
-    bool notFstRun;
+    bool isRunning;
 };
 
 #endif

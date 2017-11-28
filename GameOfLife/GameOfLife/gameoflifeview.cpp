@@ -163,6 +163,7 @@ void GameOfLifeView::runButtonClicked()
 	ui->actionSave_As->setEnabled(false);
 	ui->actionSave_Result->setEnabled(false);
 
+	this->controller->run();
 	if (!timer->isActive()) {
 		timer->start(150);
 	}	
@@ -173,6 +174,7 @@ void GameOfLifeView::stopButtonClicked()
 	if (timer->isActive()) {
 		timer->stop();
 	}
+	this->controller->stop();
 
 	ui->stopButton->setEnabled(false);
 	ui->runButton->setEnabled(true);

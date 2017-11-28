@@ -44,7 +44,7 @@ public:
     /* clear current grid
      * set all the cells to be dead
      */
-    const vector< vector<bool> > & clear();
+    void clear();
 
     /* create a new default grid
      * clear all the current data

@@ -33,6 +33,7 @@ int GameOfLife::loadFile(string fileName)
     if (check == -11)
         return -11;
 
+	gridManager.setInitGrid(gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
     gridManager.setTmpSize(gridManager.getNumOfRow(), gridManager.getNumOfCol());
     gridManager.updateLivingList();
 	return 0;
@@ -61,11 +62,14 @@ const vector<vector<bool> >& GameOfLife::clear()
 void GameOfLife::resizeGrid(unsigned int row, unsigned int col)
 {
     gridManager.resize(row, col);
+	gridManager.setInitGrid(gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
 void GameOfLife::setByClick(unsigned int row, unsigned int col)
 {
     gridManager.setByClick(row, col);
+	if (notFstRun)
+		gridManager.setInitGrid(gridManager.getPattern(), gridManager.getNumOfRow(), gridManager.getNumOfCol());
 }
 
 const vector< vector<bool> >& GameOfLife::getPattern()

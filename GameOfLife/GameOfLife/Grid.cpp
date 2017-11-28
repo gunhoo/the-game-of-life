@@ -10,7 +10,7 @@ Grid::Grid()
 
 void Grid::resizeGrid(unsigned int row, unsigned int col)
 {
-    if (row > numOfRow && col > numOfColumn) {
+    if (row >= numOfRow && col >= numOfColumn) {
         vector< vector<bool> > newShow(row, vector<bool>(col, false));
         for (int i = 0; i < numOfRow; i++) {
             for (int j = 0; j < numOfColumn; j++) {

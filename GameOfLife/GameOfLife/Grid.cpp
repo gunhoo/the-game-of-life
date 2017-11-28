@@ -10,18 +10,43 @@ Grid::Grid()
 
 void Grid::resizeGrid(unsigned int row, unsigned int col)
 {
-    if (row >= numOfRow && col >= numOfColumn) {
-        vector< vector<bool> > newShow(row, vector<bool>(col, false));
+    // two all bigger
+    // two all smaller
+    // row is bigger
+    // col is bigger
+    vector< vector<bool> > newShow(row, vector<bool>(col, false));
+    if (row >= numOfRow && col >= numOfColumn) {  // copy depends on the old pattern
         for (int i = 0; i < numOfRow; i++) {
             for (int j = 0; j < numOfColumn; j++) {
                 newShow[i][j] = gridShow[i][j];
             }
         }
-        numOfRow = row;
-        numOfColumn = col;
-        gridShow = newShow;
-        tmpGrid = newShow;
     }
+    else if (row < numOfRow && col < numOfColumn) { // copy depends on the new pattern
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < col; j++) {
+                newShow[i][j] = gridShow[i][j];
+            }
+        }
+    }
+    else if (row > numOfRow && col <= numOfColumn) { // Row depends on old one, Column depends on the new one
+        for (int i = 0; i < numOfRow; i++) {
+            for (int j = 0; j < col; j++) {
+                newShow[i][j] = gridShow[i][j];
+            }
+        }
+    }
+    else if (row <= numOfRow && col > numOfColumn) {  // Row depends on the new one, Column depens on the old one
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < numOfColumn; j++) {
+                newShow[i][j] = gridShow[i][j];
+            }
+        }
+    }
+    numOfRow = row;
+    numOfColumn = col;
+    gridShow = newShow;
+    tmpGrid = newShow;
 }
 
 void Grid::setTmpSize(unsigned int row, unsigned int col)

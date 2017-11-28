@@ -40,8 +40,6 @@ void GameWidget::setUniverseWithGrid(const vector< vector<bool> >& grid) {
 			this->universeSizeRow = row;
 			this->setCellNumber();
 		}
-
-		resetUniverse();
 	
 		for (int i = 0; i < universeSizeRow; i++) {
 			for (int j = 0; j < universeSizeCol; j++) {

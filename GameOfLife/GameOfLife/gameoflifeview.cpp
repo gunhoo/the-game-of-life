@@ -69,10 +69,14 @@ void GameOfLifeView::initialize()
 				grid = controller->getPattern();
 				ui->rowSpinBox->setValue(grid.size());
 				ui->colSpinBox->setValue(grid[0].size());
+
+				this->setCellNumberRow(grid.size());
+				this->setCellNumberCol(grid[0].size());
+
 				game->setUniverseWithGrid(grid);
 			}
 			else {
-				this->newButtonClicked();
+				this->newFile();
 			}
 		}
 		else {
@@ -103,8 +107,13 @@ void GameOfLifeView::openButtonClicked()
 	else {
 		if (this->loadFile(fileName) != -11) {
 			grid = controller->getPattern();
+
 			ui->rowSpinBox->setValue(grid.size());
 			ui->colSpinBox->setValue(grid[0].size());
+
+			this->setCellNumberRow(grid.size());
+			this->setCellNumberCol(grid[0].size());
+
 			game->setUniverseWithGrid(grid);
 		}
 		else {
@@ -220,8 +229,6 @@ void GameOfLifeView::newFile()
 int GameOfLifeView::loadFile(QString fileName)
 {
 	QMessageBox warningBox;
-
-	this->clear();
 
 	int errorCode = controller->loadFile(fileName.toStdString());
 	if (errorCode == -11) {

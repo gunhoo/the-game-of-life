@@ -27,6 +27,8 @@ const vector< vector<bool> >& GameOfLife::newFile()
 
 int GameOfLife::loadFile(string fileName)
 {
+	this->clear();
+
     int check = fileManager.load(fileName, gridManager.gridRef(), gridManager.rowRef(), gridManager.colRef()); 
     if (check == -11)
         return -11;

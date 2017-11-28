@@ -10,16 +10,18 @@ Grid::Grid()
 
 void Grid::resizeGrid(unsigned int row, unsigned int col)
 {
-    numOfRow = row;
-    numOfColumn = col;
-    vector< vector<bool> > newShow(row, vector<bool>(col, false));
-    for (int i = 0; i < numOfRow; i++) {
-        for (int j = 0; j < numOfColumn; j++) {
-            newShow[i][j] = gridShow[i][j];
+    if (row >= numOfRow && col >= numOfColumn) {
+        vector< vector<bool> > newShow(row, vector<bool>(col, false));
+        for (int i = 0; i < numOfRow; i++) {
+            for (int j = 0; j < numOfColumn; j++) {
+                newShow[i][j] = gridShow[i][j];
+            }
         }
+        numOfRow = row;
+        numOfColumn = col;
+        gridShow = newShow;
+        tmpGrid = newShow;
     }
-    gridShow = newShow;
-    tmpGrid = newShow;
 }
 
 void Grid::setTmpSize(unsigned int row, unsigned int col)

@@ -60,19 +60,21 @@ const vector< vector<bool> >& Grid::updateGrid()
     while(!currLive.empty()) {
         struct cell tmp(currLive.back());
         currLive.pop_back();
-        getMinBlock(tmp.row, tmp.col, max_row, min_row, max_col, min_col);
-        updateHelper(tmp.row, tmp.col, updateCell);
-        for (int r = -1; r < 2; r++) {
-            for (int c = -1; c < 2; c++) {
-                if ((tmp.row + r) >= 0 && (tmp.col + c) >= 0 && (tmp.row + r) < numOfRow && (tmp.col + c) < numOfColumn) {
-                    if (r != 0 || c != 0) {
-                        if (!gridShow[tmp.row + r][tmp.col + c]) {
-                            countGrid[tmp.row + r][tmp.col + c]++;
-                        }
-                    }
-                }
-            }
-        }
+		if (tmp.row < numOfRow && tmp.col < numOfColumn) {
+			getMinBlock(tmp.row, tmp.col, max_row, min_row, max_col, min_col);
+			updateHelper(tmp.row, tmp.col, updateCell);
+			for (int r = -1; r < 2; r++) {
+				for (int c = -1; c < 2; c++) {
+					if ((tmp.row + r) >= 0 && (tmp.col + c) >= 0 && (tmp.row + r) < numOfRow && (tmp.col + c) < numOfColumn) {
+						if (r != 0 || c != 0) {
+							if (!gridShow[tmp.row + r][tmp.col + c]) {
+								countGrid[tmp.row + r][tmp.col + c]++;
+							}
+						}
+					}
+				}
+			}
+		}
     }
 
     for (unsigned int i = min_row; i <= max_row; i++) {

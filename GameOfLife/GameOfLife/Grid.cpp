@@ -10,17 +10,34 @@ Grid::Grid()
 
 void Grid::resizeGrid(unsigned int row, unsigned int col)
 {
-    if (row > numOfRow && col > numOfColumn) {
-        vector< vector<bool> > newShow(row, vector<bool>(col, false));
-        for (int i = 0; i < numOfRow; i++) {
-            for (int j = 0; j < numOfColumn; j++) {
+	int searchRow, searchCol;
+    if (row != numOfRow || col != numOfColumn) {
+		vector< vector<bool> > newShow(row, vector<bool>(col, false));
+
+		if (row <= numOfRow) {
+			searchRow = row;
+		}
+		else {
+			searchRow = numOfRow;
+		}
+
+		if (col <= numOfColumn) {
+			searchCol = col;
+		} 
+		else {
+			searchCol = numOfColumn;
+		}
+        
+        for (int i = 0; i < searchRow; i++) {
+            for (int j = 0; j < searchCol; j++) {
                 newShow[i][j] = gridShow[i][j];
             }
         }
-        gridShow = newShow;
-        tmpGrid = newShow;
-        numOfRow = row;
-        numOfColumn = col;
+
+		gridShow = newShow;
+		tmpGrid = newShow;
+		numOfRow = row;
+		numOfColumn = col;
     }
 }
 
